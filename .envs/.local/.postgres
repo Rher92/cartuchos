@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=cartuchos
+POSTGRES_USER=HAfvwlDJCeuaGoxteyPyRDVuSNNkZMmN
+POSTGRES_PASSWORD=cn3i0fwwg6AQnon3o3A6qJ3MMnsfrcOrUydAnTosvB9ydW9AJTm6RlPh8qS5me6w
