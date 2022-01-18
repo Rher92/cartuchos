@@ -8,7 +8,7 @@ import store from './store';
 
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:8000/';  // the FastAPI backend
+axios.defaults.baseURL = 'http://localhost:8000/';  //  backend
 
 Vue.config.productionTip = false;
 

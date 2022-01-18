@@ -11,7 +11,7 @@ SECRET_KEY = env(
     default="rQYVY0BpX4gBrrO7ZOqNql7AoW4nNCq7fJVe4LI75syfz0mOIA6BGVQeejm3jKLB",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", '*']
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -56,3 +56,27 @@ INSTALLED_APPS += ["django_extensions"]  # noqa F405
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+# CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = False
+
+# https://www.stackhawk.com/blog/django-cors-guide/
+CORS_ALLOW_CREDENTIALS=True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
+]
+
+# CORS_ALLOW_METHODS = [
+# 'DELETE',
+# 'GET',
+# 'OPTIONS',
+# 'PATCH',
+# 'POST',
+# 'PUT',
+# ]
+
+# CORS_ORIGIN_WHITELIST = (
+#     '*'
+# )

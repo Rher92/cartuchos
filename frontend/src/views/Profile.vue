@@ -3,8 +3,9 @@
     <h1>Your Profile</h1>
     <hr/><br/>
     <div>
-      <p><strong>Full Name:</strong> <span>{{ user.full_name }}</span></p>
       <p><strong>Username:</strong> <span>{{ user.username }}</span></p>
+      <p><strong>Email:</strong> <span>{{ user.email }}</span></p>
+      <!-- <p><button @click="deleteAccount()" class="btn btn-primary">Delete Account</button></p> -->
       <p><button @click="deleteAccount()" class="btn btn-primary">Delete Account</button></p>
     </div>
   </section>
