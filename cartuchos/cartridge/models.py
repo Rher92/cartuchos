@@ -10,6 +10,8 @@ class Manufacturer(models.Model):
         max_length=255
     )
 
+    def __str__(self):
+        return self.name
 
 class Family(models.Model):
     name = models.CharField(
@@ -17,7 +19,9 @@ class Family(models.Model):
         blank=True, 
         max_length=255
     )
-    
+
+    def __str__(self):
+        return self.name
 
 class SubFamilyIntern(models.Model):
     name = models.CharField(
@@ -25,6 +29,9 @@ class SubFamilyIntern(models.Model):
         blank=True, 
         max_length=255
     )
+
+    def __str__(self):
+        return self.name
     
 
 class SubFamily(models.Model):
@@ -33,6 +40,9 @@ class SubFamily(models.Model):
         blank=True, 
         max_length=255
     )
+
+    def __str__(self):
+        return self.name
     
 
 class Reference(models.Model):
@@ -41,6 +51,9 @@ class Reference(models.Model):
         blank=True, 
         max_length=255
     )
+
+    def __str__(self):
+        return self.name
     
     
 class ColorReference(models.Model):
@@ -49,7 +62,9 @@ class ColorReference(models.Model):
         blank=True, 
         max_length=255
     )
-    
+
+    def __str__(self):
+        return self.name
     
 class Color(models.Model):
     name = models.CharField(
@@ -58,6 +73,8 @@ class Color(models.Model):
         max_length=255
     )
 
+    def __str__(self):
+        return self.name
 
 class Size(models.Model):
     value = models.CharField(
@@ -66,6 +83,9 @@ class Size(models.Model):
         max_length=255
     )
 
+    def __str__(self):
+        return self.value
+
 
 class Clase(models.Model):
     name = models.CharField(
@@ -73,6 +93,9 @@ class Clase(models.Model):
         blank=True, 
         max_length=255
     )
+
+    def __str__(self):
+        return self.name
     
     
 class GroupUnity(models.Model):
@@ -82,6 +105,9 @@ class GroupUnity(models.Model):
         max_length=255
     )
 
+    def __str__(self):
+        return self.name
+
 
 class ReferenceGroup(models.Model):
     name = models.CharField(
@@ -90,6 +116,9 @@ class ReferenceGroup(models.Model):
         max_length=255
     )
 
+    def __str__(self):
+        return self.name
+
 
 class FboCode(models.Model):
     name = models.CharField(
@@ -97,6 +126,9 @@ class FboCode(models.Model):
         blank=True, 
         max_length=255
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Cartridges(models.Model):
