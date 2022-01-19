@@ -52,3 +52,8 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+
+
+admin.site.site_header = "Retornos Consumibles"
+admin.site.site_title = "Portal de Administracion de Retornos Consumibles"
+admin.site.index_title = "Bienvenido al Portal de Administracion de Retornos Consumibles"
