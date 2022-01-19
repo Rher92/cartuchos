@@ -55,5 +55,5 @@ if settings.DEBUG:
 
 
 admin.site.site_header = "Retornos Consumibles"
-admin.site.site_title = "Portal de Administracion de Retornos Consumibles"
-admin.site.index_title = "Bienvenido al Portal de Administracion de Retornos Consumibles"
+admin.site.site_title = "Retornos Consumibles"
+admin.site.index_title = "Portal de Administracion"
