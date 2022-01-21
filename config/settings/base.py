@@ -80,6 +80,7 @@ LOCAL_APPS = [
     "cartuchos.users",
     "cartuchos.cartridge",
     "cartuchos.clients",
+    "cartuchos.fees",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

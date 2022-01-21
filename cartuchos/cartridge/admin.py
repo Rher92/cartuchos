@@ -11,6 +11,66 @@ from .models import Cartridges, Manufacturer, Family, SubFamilyIntern, SubFamily
                     ReferenceGroup, FboCode
 
 
+@admin.register(GroupUnity)
+class GroupUnityAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ReferenceGroup)
+class ReferenceGroupAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(FboCode)
+class FboCodeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Color)
+class ColorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Size)
+class SizeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Clase)
+class ClaseAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ColorReference)
+class ColorReferenceAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Reference)
+class ReferenceAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(SubFamily)
+class SubFamilyAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Manufacturer)
+class ManufacturerAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Family)
+class FamilyAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(SubFamilyIntern)
+class SubFamilyInternAdmin(admin.ModelAdmin):
+    pass
+
+
 class CsvImportForm(forms.Form):
     csv_file = forms.FileField()
 

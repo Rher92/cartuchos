@@ -1,0 +1,2002 @@
+[
+{
+    "model": "fees.fees",
+    "pk": 401,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 402,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 403,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.03,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 404,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.06,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 405,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.12,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 406,
+    "fields": {
+        "name": "TC",
+        "fee": 0.12,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 407,
+    "fields": {
+        "name": "TO",
+        "fee": 0.15,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 408,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.25,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 409,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.28,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 410,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.3,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 411,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.33,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 412,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.38,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 413,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.4,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 414,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.45,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 415,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.5,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 416,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.55,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 417,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.6,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 418,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.85,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 419,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 0.85,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 420,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 1.0,
+        "family": 4,
+        "sub_family_intern": 15
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 421,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 422,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 423,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 424,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 425,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 426,
+    "fields": {
+        "name": "TC",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 427,
+    "fields": {
+        "name": "TO",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 428,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 429,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 430,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 431,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 432,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 433,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 434,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 435,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 436,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 437,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 438,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 439,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 440,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 1.0,
+        "family": 4,
+        "sub_family_intern": 14
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 441,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 442,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 443,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 444,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 445,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 446,
+    "fields": {
+        "name": "TC",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 447,
+    "fields": {
+        "name": "TO",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 448,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 449,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 450,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 451,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 452,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.1,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 453,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.2,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 454,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.2,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 455,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.2,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 456,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.35,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 457,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.35,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 458,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.35,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 459,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 0.35,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 460,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 1.0,
+        "family": 4,
+        "sub_family_intern": 16
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 461,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 462,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 463,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.06,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 464,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.12,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 465,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.23,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 466,
+    "fields": {
+        "name": "TC",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 467,
+    "fields": {
+        "name": "TO",
+        "fee": 0.3,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 468,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.35,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 469,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.4,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 470,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.44,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 471,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.46,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 472,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.52,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 473,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.56,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 474,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.6,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 475,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.65,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 476,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.72,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 477,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.8,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 478,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.8,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 479,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 0.85,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 480,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 1.0,
+        "family": 3,
+        "sub_family_intern": 9
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 481,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 482,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 483,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.06,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 484,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.12,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 485,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.23,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 486,
+    "fields": {
+        "name": "TC",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 487,
+    "fields": {
+        "name": "TO",
+        "fee": 0.3,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 488,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.35,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 489,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.4,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 490,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.44,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 491,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.46,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 492,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.52,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 493,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.56,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 494,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.6,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 495,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.65,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 496,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.72,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 497,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.8,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 498,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.82,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 499,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 0.9,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 500,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 1.0,
+        "family": 3,
+        "sub_family_intern": 13
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 501,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 502,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 503,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.06,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 504,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.12,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 505,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.23,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 506,
+    "fields": {
+        "name": "TC",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 507,
+    "fields": {
+        "name": "TO",
+        "fee": 0.3,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 508,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.35,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 509,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.4,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 510,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.44,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 511,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.46,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 512,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.52,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 513,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.56,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 514,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.6,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 515,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.65,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 516,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.72,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 517,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.8,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 518,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.85,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 519,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 1.0,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 520,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 1.0,
+        "family": 3,
+        "sub_family_intern": 10
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 521,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 522,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 523,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.06,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 524,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.12,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 525,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.23,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 526,
+    "fields": {
+        "name": "TC",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 527,
+    "fields": {
+        "name": "TO",
+        "fee": 0.3,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 528,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.35,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 529,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.4,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 530,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.44,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 531,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.46,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 532,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.52,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 533,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.56,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 534,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.6,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 535,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.65,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 536,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.72,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 537,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.8,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 538,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.85,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 539,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 1.0,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 540,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 1.0,
+        "family": 3,
+        "sub_family_intern": 11
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 541,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 542,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 543,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.03,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 544,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.06,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 545,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.06,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 546,
+    "fields": {
+        "name": "TC",
+        "fee": 0.15,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 547,
+    "fields": {
+        "name": "TO",
+        "fee": 0.15,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 548,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 549,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 550,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 551,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 552,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.25,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 553,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.35,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 554,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.35,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 555,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.45,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 556,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.5,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 557,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.6,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 558,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.6,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 559,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 0.85,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 560,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 1.0,
+        "family": 3,
+        "sub_family_intern": 12
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 561,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 562,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 563,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 564,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 565,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 566,
+    "fields": {
+        "name": "TC",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 567,
+    "fields": {
+        "name": "TO",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 568,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 569,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 570,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 571,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 572,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 573,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 574,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 575,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 576,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 577,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 578,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 579,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 580,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 0.0,
+        "family": 5,
+        "sub_family_intern": 17
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 581,
+    "fields": {
+        "name": "TGRATIS",
+        "fee": 0.0,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 582,
+    "fields": {
+        "name": "COBRO",
+        "fee": 0.0,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 583,
+    "fields": {
+        "name": "TARIFA 2",
+        "fee": 0.0,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 584,
+    "fields": {
+        "name": "TARIFA 3",
+        "fee": 0.0,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 585,
+    "fields": {
+        "name": "TARIFA 35",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 586,
+    "fields": {
+        "name": "TC",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 587,
+    "fields": {
+        "name": "TO",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 588,
+    "fields": {
+        "name": "TARIFA 54",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 589,
+    "fields": {
+        "name": "TARIFA 60",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 590,
+    "fields": {
+        "name": "TARIFA 65",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 591,
+    "fields": {
+        "name": "TARIFA 70",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 592,
+    "fields": {
+        "name": "TARIFA 75",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 593,
+    "fields": {
+        "name": "TARIFA 80",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 594,
+    "fields": {
+        "name": "TARIFA 85",
+        "fee": 0.25,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 595,
+    "fields": {
+        "name": "TARIFA 90",
+        "fee": 0.25,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 596,
+    "fields": {
+        "name": "TMAX",
+        "fee": 0.5,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 597,
+    "fields": {
+        "name": "TSUPER",
+        "fee": 0.1,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 598,
+    "fields": {
+        "name": "TMAYOR",
+        "fee": 0.0,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 599,
+    "fields": {
+        "name": "TMAYO21",
+        "fee": 0.0,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+},
+{
+    "model": "fees.fees",
+    "pk": 600,
+    "fields": {
+        "name": "TCOMPLETA",
+        "fee": 0.5,
+        "family": 6,
+        "sub_family_intern": 18
+    }
+}
+]
