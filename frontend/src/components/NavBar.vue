@@ -21,7 +21,7 @@
               <router-link class="nav-link" to="/albaran">Albaran</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="logout">Log Out</a>
+              <a class="nav-link" @click="logout">Cerrar sesión</a>
             </li>
           </ul>
           <ul v-else class="navbar-nav me-auto mb-2 mb-md-0">

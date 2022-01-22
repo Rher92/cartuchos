@@ -1,9 +1,9 @@
 <template>
   <section>
-    <h1>Your Profile</h1>
+    <h1>Perfil</h1>
     <hr/><br/>
     <div>
-      <p><strong>Username:</strong> <span>{{ user.user.username }}</span></p>
+      <p><strong>Usuario:</strong> <span>{{ user.user.username }}</span></p>
       <p><strong>Email:</strong> <span>{{ user.user.email }}</span></p>
       <!-- <p><button @click="deleteAccount()" class="btn btn-primary">Delete Account</button></p> -->
       <!-- <p><button @click="deleteAccount()" class="btn btn-primary">Delete Account</button></p> -->

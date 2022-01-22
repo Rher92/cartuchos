@@ -1,15 +1,16 @@
 <template>
   <section>
-    <p>This site is built with FastAPI and Vue.</p>
+    <!-- <p>Inicio</p> -->
 
-    <div v-if="isLoggedIn" id="logout">
+    <!-- <div v-if="isLoggedIn" id="logout">
       <p id="logout">Click <a href="/dashboard">here</a> to view all notes.</p>
     </div>
     <p v-else>
       <span><a href="/register">Register</a></span>
       <span> or </span>
       <span><a href="/login">Log In</a></span>
-    </p>
+    </p> -->
+    <h1>Pagina de Inicio</h1>
   </section>
 </template>
 <script>
