@@ -21,29 +21,29 @@
           <h3 class="text-center" style="margin: 5px">Información</h3>
           <div class="col-md col-sm form-group">
               <label for="number" class="form-label">Número:</label>
-              <input type="text" name="number" v-model="form.number" class="form-control" />
+              <span class="input-group-text" id="basic-addon3">Número</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="address" class="form-label">Dirección:</label>
-              <input type="text" name="address" v-model="form.address" class="form-control" />
+              <span class="input-group-text" id="basic-addon3">Dirección</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
               <label for="contact" class="form-label">Persona de Contacto:</label>
-              <input type="text" name="contact" v-model="form.contact" class="form-control" />
+              <span class="input-group-text" id="basic-addon3">Persona de Contacto</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="telephone" class="form-label">Teléfono:</label>
-              <input type="text" name="telephone" v-model="form.telephone" class="form-control" />
+              <span class="input-group-text" id="basic-addon3">Teléfono</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="email" class="form-label">Correo:</label>
-              <input type="text" name="email" v-model="form.email" class="form-control" />
+              <span class="input-group-text" id="basic-addon3">Correo</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="rate" class="form-label">Rate:</label>
-              <input type="text" name="rate" v-model="form.rate" class="form-control" />
+              <span class="input-group-text" id="basic-addon3">Rate</span>
           </div>
         </div>
 
