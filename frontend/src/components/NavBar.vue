@@ -8,14 +8,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul v-if="isLoggedIn" class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link class="nav-link" to="/">Home</router-link>
-            </li>
+            </li> -->
             <!-- <li class="nav-item">
               <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
             </li> -->
             <li class="nav-item">
-              <router-link class="nav-link" to="/profile">My Profile</router-link>
+              <router-link class="nav-link" to="/profile">Mi Perfil</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/albaran">Albaran</router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" @click="logout">Log Out</a>

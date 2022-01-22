@@ -19,19 +19,22 @@ const actions = {
     UserForm.append('password', form.password);
     await dispatch('logIn', UserForm);
   },
-  async logIn({dispatch, commit}, user) {
+
+  async logIn({commit}, user) {
     let userLogin = await axios.post('api/users/login/', user, headers);
-    await commit('setUser', userLogin.data.user);
+    await commit('setUserToken', userLogin.data);
     // await dispatch('viewMe', userLogin);
   },
-  async viewMe({commit}, userLogin) {
 
-    await commit('setUser', userLogin.data.user);
+  async viewMe({commit}, userLogin) {
+    // await commit('setUser', userLogin.data.user);
   },
+
   // eslint-disable-next-line no-empty-pattern
   async deleteUser({}, id) {
     await axios.delete(`user/${id}`);
   },
+
   async logOut({commit}) {
     let user = null;
     commit('logout', user);
@@ -39,9 +42,8 @@ const actions = {
 };
 
 const mutations = {
-  setUser(state, username) {
-    console.log(username)
-    state.user = username;
+  setUserToken(state, user) {
+    state.user = user;
   },
   logout(state, user){
     state.user = user;
