@@ -7,12 +7,20 @@
         <div class="row">
           <h3 class="text-center" style="margin: 5px">Cliente</h3>
           <div class="col-md col-sm form-group">
-              <label for="cifrc" class="form-label">CIFRC:</label>
-              <input type="text" name="cifrc" v-model="form.cifrc" class="form-control" />
+            <label for="cifrc" class="form-label">CIFRC:</label>
+            <input 
+              v-model="form.cifrc" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">CIFRC es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-              <label for="name" class="form-label">Nombre:</label>
-              <input type="text" name="name" v-model="form.name" class="form-control" />
+            <label for="name" class="form-label">Nombre:</label>
+            <input 
+              v-model="form.name" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.name)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">Nombre es requerido</div>
           </div>
         </div>
         
@@ -52,41 +60,80 @@
           <h3 class="text-center" style="margin: 5px">Descartables</h3>
           <div class="col-md col-sm form-group">
               <label for="salesman" class="form-label">Vendedor:</label>
-              <input type="text" name="salesman" v-model="form.salesman" class="form-control" />
+              <input 
+                v-model="form.salesman" 
+                v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.salesman)  && form.fieldsBlured}"
+                v-on:blur="fieldsBlured = true">
+              <div class="invalid-feedback">Vendedor es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-              <label for="weight" class="form-label">Peso:</label>
-              <input type="text" name="weight" v-model="form.weight" class="form-control" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md col-sm form-group">
-              <label for="laser_residual" class="form-label">Laser Residual:</label>
-              <input type="text" name="laser_residual" v-model="form.laser_residual" class="form-control" />
-          </div>
-          <div class="col-md col-sm form-group">
-              <label for="inkject_residual" class="form-label">Inkject Residual:</label>
-              <input type="text" name="inkject_residual" v-model="form.inkject_residual" class="form-control" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md col-sm form-group">
-              <label for="laser_weight" class="form-label">Peso Laser(Kg):</label>
-              <input type="text" name="laser_weight" v-model="form.laser_weight" class="form-control" />
-          </div>
-          <div class="col-md col-sm form-group">
-              <label for="inkjet_weight" class="form-label">Peso Inkject(Kg):</label>
-              <input type="text" name="inkjet_weight" v-model="form.inkjet_weight" class="form-control" />
+            <label for="weight" class="form-label">Peso:</label>
+            <input
+              type="number"
+              v-model="form.weight" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.weight)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">Peso es requerido</div>
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-              <label for="total_items" class="form-label">Artículos en total:</label>
-              <input type="text" name="total_items" v-model="form.total_items" class="form-control" />
+            <label for="laser_residual" class="form-label">Laser Residual:</label>
+            <input
+              type="number"
+              v-model="form.laser_residual" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.laser_residual)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">Laser Residual es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-              <label for="total_weight" class="form-label">Peso Total(Kg):</label>
-              <input type="text" name="total_weight" v-model="form.total_weight" class="form-control" />
+            <label for="inkject_residual" class="form-label">Inkject Residual:</label>
+            <input 
+              type="number"
+              v-model="form.inkject_residual" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.inkject_residual)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">Inkject Residual es requerido</div>          
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md col-sm form-group">
+            <label for="laser_weight" class="form-label">Peso Laser(Kg):</label>
+            <input
+              type="number"
+              v-model="form.laser_weight" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.laser_weight)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">Peso Laser es requerido</div>
+          </div>
+          <div class="col-md col-sm form-group">
+            <label for="inkjet_weight" class="form-label">Peso Inkject(Kg):</label>
+            <input
+              type="number"
+              v-model="form.inkjet_weight" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.inkjet_weight)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">Peso Inkject es requerido</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md col-sm form-group">
+            <label for="total_items" class="form-label">Artículos en total:</label>
+            <input
+              type="number"
+              v-model="form.total_items" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.total_items)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">Artículos en total es requerido</div>
+          </div>
+          <div class="col-md col-sm form-group">
+            <label for="total_weight" class="form-label">Peso Total(Kg):</label>
+            <input
+              type="number"
+              v-model="form.total_weight" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.total_weight)  && form.fieldsBlured}"
+              v-on:blur="fieldsBlured = true">
+            <div class="invalid-feedback">Peso Total es requerido</div>
           </div>
         </div>
       </div>
@@ -106,25 +153,73 @@ export default {
   data() {
     return {
       form: {
+        fieldsBlured : false,
+        valid : false,
+        submitted : false,
+
+        // CLIENT
         cifrc: '',
         name:'',
+
+        // INFORMACION
         number: '',
         address:'',
         telephone: '',
         email:'',
         contact: '',
         rate:'',
-        weight: '',
+
+        // DESCARTABLES
         salesman:'',
+        weight: '',
         laser_residual: '',
-        inkject_residual:'',
+        inkject_residual: '',
         laser_weight: '',
-        inkjet_weight:'',
+        inkjet_weight: '',
         total_weight: '',
-        total_items:'',
+        total_items: '',
       }
     };
   },
+  methods : {
+    validate : function(){
+      this.form.fieldsBlured = true;
+
+      cifrc = this.validInputTexts(this.form.cifrc)
+      name = this.validInputTexts(this.form.name)
+      salesman = this.validInputTexts(this.form.salesman)
+
+      namev = this.validInputNumber(this.form.laser_residual)
+      cifrcv = this.validInputNumber(this.form.inkject_residual)
+      namev = this.validInputNumber(this.form.laser_weight)
+      cifrcv = this.validInputNumber(this.form.total_weight)
+      namev = this.validInputNumber(this.form.total_items)
+       if(namev && cifrcv){
+          this.valid = true;
+       }
+    },
+    validInputTexts : function(field) {
+      let _return = false;
+      if (field.length > 0){
+        _return = true
+      }
+      return _return;
+    },
+    validInputNumber : function(field) {
+      let _return = false;
+      if (field > 0){
+        _return = true
+      }
+      return _return;
+    },
+    submit : function(){
+        this.validate();
+        if(this.form.valid){
+          //THIS IS WHERE YOU SUBMIT DATA TO SERVER
+          this.form.submitted = true;
+        }
+      } //end submit
+  }
   // methods: {
   //   ...mapActions(['logIn']),
   //   async submit() {
