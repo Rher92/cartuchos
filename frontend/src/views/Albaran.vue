@@ -185,15 +185,17 @@ export default {
     validate : function(){
       this.form.fieldsBlured = true;
 
-      cifrc = this.validInputTexts(this.form.cifrc)
-      name = this.validInputTexts(this.form.name)
-      salesman = this.validInputTexts(this.form.salesman)
+      cifrcv = this.validInputTexts(this.form.cifrc)
+      namev = this.validInputTexts(this.form.name)
+      salesmanv = this.validInputTexts(this.form.salesman)
 
-      namev = this.validInputNumber(this.form.laser_residual)
-      cifrcv = this.validInputNumber(this.form.inkject_residual)
-      namev = this.validInputNumber(this.form.laser_weight)
-      cifrcv = this.validInputNumber(this.form.total_weight)
-      namev = this.validInputNumber(this.form.total_items)
+      weightv = this.validInputNumber(this.form.weight)
+      laser_residualv = this.validInputNumber(this.form.laser_residual)
+      inkject_residualv = this.validInputNumber(this.form.inkject_residual)
+      laser_weightv = this.validInputNumber(this.form.laser_weight)
+      inkjet_weightv = this.validInputNumber(this.form.inkjet_weight)
+      total_weightv = this.validInputNumber(this.form.total_weight)
+      total_itemsv = this.validInputNumber(this.form.total_items)
        if(namev && cifrcv){
           this.valid = true;
        }
