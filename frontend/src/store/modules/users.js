@@ -26,9 +26,9 @@ const actions = {
     // await dispatch('viewMe', userLogin);
   },
 
-  async viewMe({commit}, userLogin) {
-    // await commit('setUser', userLogin.data.user);
-  },
+  // async viewMe({commit}, userLogin) {
+  //   // await commit('setUser', userLogin.data.user);
+  // },
 
   // eslint-disable-next-line no-empty-pattern
   async deleteUser({}, id) {

@@ -8,50 +8,78 @@
           <h3 class="text-center" style="margin: 5px">Cliente</h3>
           <div class="col-md col-sm form-group">
             <label for="cifrc" class="form-label">CIFRC:</label>
-            <input 
-              v-model="form.cifrc" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
-            <div class="invalid-feedback">CIFRC es requerido</div>
+            <div id="cifrc">
+              <v-select 
+                :options="response_short"
+                @input="setSelectedShort"
+                label="cifrc"
+                v-model="form.cifrc" 
+                v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
+                v-on:blur="fieldsBlured = true">
+              ></v-select>
+              <div class="invalid-feedback">CIFRC es requerido</div>
+            </div>
           </div>
           <div class="col-md col-sm form-group">
             <label for="name" class="form-label">Nombre:</label>
-            <input 
-              v-model="form.name" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.name)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
+              <v-select 
+                :options="response_short"
+                @input="setSelectedShort"
+                label="nombre_razon_social"
+                v-model="form.name" 
+                v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
+                v-on:blur="fieldsBlured = true">
+              ></v-select>
             <div class="invalid-feedback">Nombre es requerido</div>
           </div>
         </div>
         
+        <!-- <div id="cifrc">
+          <h1>Vue Select</h1>
+          <v-select 
+            :options="response_large"
+            @input="setSelected"
+            label="cifrc"
+            v-model="form.cifrc" 
+            v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
+            v-on:blur="fieldsBlured = true">
+          ></v-select>
+        </div> -->
+
         <!-- INFORMACION -->
         <div class="row" style="margin-top: 15px">
           <h3 class="text-center" style="margin: 5px">Información</h3>
           <div class="col-md col-sm form-group">
               <label for="number" class="form-label">Número:</label>
-              <span class="input-group-text" id="basic-addon3">Número</span>
+              <span class="input-group-text" id="basic-addon3 " v-if="!this.form.number">-</span>
+              <span class="input-group-text" id="basic-addon3 " v-else>{{form.number}}</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="address" class="form-label">Dirección:</label>
-              <span class="input-group-text" id="basic-addon3">Dirección</span>
+              <span class="input-group-text" id="basic-addon3" v-if="!this.form.address">-</span>
+              <span class="input-group-text" id="basic-addon3" v-else>{{form.address}}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
               <label for="contact" class="form-label">Persona de Contacto:</label>
-              <span class="input-group-text" id="basic-addon3">Persona de Contacto</span>
+              <span class="input-group-text" id="basic-addon3" v-if="!this.form.contact">-</span>
+              <span class="input-group-text" id="basic-addon3" v-else>{{form.contact}}</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="telephone" class="form-label">Teléfono:</label>
-              <span class="input-group-text" id="basic-addon3">Teléfono</span>
+              <span class="input-group-text" id="basic-addon3" v-if="!this.form.telephone">-</span>
+              <span class="input-group-text" id="basic-addon3" v-else>{{form.telephone}}</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="email" class="form-label">Correo:</label>
-              <span class="input-group-text" id="basic-addon3">Correo</span>
+              <span class="input-group-text" id="basic-addon3" v-if="!this.form.email">-</span>
+              <span class="input-group-text" id="basic-addon3" v-else>{{form.email}}</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="rate" class="form-label">Rate:</label>
-              <span class="input-group-text" id="basic-addon3">Rate</span>
+              <span class="input-group-text" id="basic-addon3" v-if="!this.form.rate">-</span>
+              <span class="input-group-text" id="basic-addon3" v-else>{{form.rate}}</span>
           </div>
         </div>
 
@@ -147,11 +175,63 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
+import vSelect from "vue-select"
+import "vue-select/dist/vue-select.css";
+
 export default {
   name: 'Albaran',
   data() {
     return {
+
+      response_short: [
+        {
+            "id": 53,
+            "cifrc": "b99456931",
+            "nombre_razon_social": "365 vozes s.l."
+        },
+        {
+            "id": 54,
+            "cifrc": "b29750445",
+            "nombre_razon_social": "3b intermatic sl"
+        },
+      ],
+      response_large: [
+          {
+              "id": 53,
+              "cifrc": "b99456931",
+              "direccion": "calle  escritor josé donoso, 11 ",
+              "telefono": "876 030 299",
+              "persona_contacto": "",
+              "email": "agarcia@365vozes.com",
+              "nombre_razon_social": {
+                  "nombre": "365 vozes s.l."
+              },
+              "contrato_firmado": {
+                  "nombre": "false"
+              },
+              "clasificacion": {
+                  "nombre": "c*"
+              }
+          },
+        {
+            "id": 54,
+            "cifrc": "b29750445",
+            "direccion": "avda. ricardo soriano, 36, 1",
+            "telefono": "34 952 82 65 51",
+            "persona_contacto": "",
+            "email": "comercial@3bgrupo.com",
+            "nombre_razon_social": {
+                "nombre": "3b intermatic sl"
+            },
+            "contrato_firmado": {
+                "nombre": "false"
+            },
+            "clasificacion": {
+                "nombre": "c*"
+            }
+        }
+      ],
+
       form: {
         fieldsBlured : false,
         valid : false,
@@ -163,14 +243,14 @@ export default {
 
         // INFORMACION
         number: '',
-        address:'',
+        address: '',
         telephone: '',
-        email:'',
+        email: '',
         contact: '',
-        rate:'',
+        rate: '',
 
         // DESCARTABLES
-        salesman:'',
+        salesman: '',
         weight: '',
         laser_residual: '',
         inkject_residual: '',
@@ -182,37 +262,73 @@ export default {
     };
   },
   methods : {
+    // selectedOption(){
+    //   console.log("here")
+    // },
+    setSelectedShort(value){
+        if(value != null){
+          this.form.cifrc = value.cifrc
+          this.form.name = value.nombre_razon_social
+        } else {
+          for (let items in this.form){
+            this.form[items] = ''
+          }
+        } 
+    },
+    setSelected(value)
+    {
+      if(value != null){
+        this.form.cifrc = value.cifrc
+        this.form.name = value.nombre_razon_social.nombre
+        this.form.number = value.nombre_razon_social.nombre
+        this.form.address = value.direccion
+        this.form.telephone = value.telefono
+        this.form.email = value.email
+        this.form.contact = value.persona_contacto
+        this.form.rate = value.clasificacion.nombre
+        this.form.number = value.id
+      }else{
+        for (let items in this.form){
+          this.form[items] = ''
+        }
+      }
+
+    },
     validate : function(){
       this.form.fieldsBlured = true;
 
-      cifrcv = this.validInputTexts(this.form.cifrc)
-      namev = this.validInputTexts(this.form.name)
-      salesmanv = this.validInputTexts(this.form.salesman)
+      // let cifrcv = this.validInputTexts(this.form.cifrc)
+      // let namev = this.validInputTexts(this.form.name)
+      // salesmanv = this.validInputTexts(this.form.salesman)
 
-      weightv = this.validInputNumber(this.form.weight)
-      laser_residualv = this.validInputNumber(this.form.laser_residual)
-      inkject_residualv = this.validInputNumber(this.form.inkject_residual)
-      laser_weightv = this.validInputNumber(this.form.laser_weight)
-      inkjet_weightv = this.validInputNumber(this.form.inkjet_weight)
-      total_weightv = this.validInputNumber(this.form.total_weight)
-      total_itemsv = this.validInputNumber(this.form.total_items)
-       if(namev && cifrcv){
-          this.valid = true;
-       }
+      // weightv = this.validInputNumber(this.form.weight)
+      // laser_residualv = this.validInputNumber(this.form.laser_residual)
+      // inkject_residualv = this.validInputNumber(this.form.inkject_residual)
+      // laser_weightv = this.validInputNumber(this.form.laser_weight)
+      // inkjet_weightv = this.validInputNumber(this.form.inkjet_weight)
+      // total_weightv = this.validInputNumber(this.form.total_weight)
+      // total_itemsv = this.validInputNumber(this.form.total_items)
+      //  if(namev && cifrcv){
+      //     this.valid = true;
+      //  }
     },
     validInputTexts : function(field) {
-      let _return = false;
-      if (field.length > 0){
-        _return = true
-      }
-      return _return;
+      if (field !== '' && field !== null){ 
+        let _return = false;
+        if (field.length > 0){
+          _return = true
+        }
+        return _return;
+        }
     },
     validInputNumber : function(field) {
-      let _return = false;
-      if (field > 0){
-        _return = true
+      if (field !== '' && field !== null){ 
+        let _return = false;
+        if (field > 0){
+          _return = true
+        }
+        return _return;
       }
-      return _return;
     },
     submit : function(){
         this.validate();
@@ -221,7 +337,7 @@ export default {
           this.form.submitted = true;
         }
       } //end submit
-  }
+  },
   // methods: {
   //   ...mapActions(['logIn']),
   //   async submit() {
@@ -232,5 +348,12 @@ export default {
   //     this.$router.push('/profile').catch((e) => console.log(e));;
   //   }
   // }
+  components:{
+    vSelect
+  },
 }
+
+
 </script>
+
+
