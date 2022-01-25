@@ -116,7 +116,7 @@ class ClientLargeSerializer(serializers.ModelSerializer):
         
 
 class ClientShortSerializer(serializers.ModelSerializer):
-    nombre_razon_social = NombreRazonSocialSerializer()
+    nombre_razon_social = serializers.SerializerMethodField()
     
     class Meta:
         model = Cliente
@@ -126,6 +126,12 @@ class ClientShortSerializer(serializers.ModelSerializer):
             "nombre_razon_social",
         ]
         
+    def get_nombre_razon_social(self, obj):
+        _return = None
+        if hasattr(obj, 'nombre_razon_social'):
+            _return = obj.nombre_razon_social.nombre
+        return _return
+
 
 class ClientAllSerializer(serializers.ModelSerializer):
     
