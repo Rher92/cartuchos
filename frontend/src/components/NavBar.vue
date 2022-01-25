@@ -18,7 +18,7 @@
               <router-link class="nav-link" to="/profile">Mi Perfil</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/albaran">Albaran</router-link>
+              <router-link class="nav-link" to="/client">Cargar Albaran</router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" @click="logout">Cerrar sesión</a>

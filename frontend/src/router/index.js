@@ -10,7 +10,7 @@ import Login from '@/views/Login';
 import Note from '@/views/Note';
 import Profile from '@/views/Profile';
 import Register from '@/views/Register';
-import Albaran from  '@/views/Albaran';
+import Client from  '@/views/Client';
 
 Vue.use(VueRouter);
 
@@ -43,9 +43,9 @@ const routes = [
     meta: {requiresAuth: true},
   },
   {
-    path: '/albaran',
-    name: 'Albaran',
-    component: Albaran,
+    path: '/client',
+    name: 'Client',
+    component: Client,
     meta: {requiresAuth: true},
   },
   {

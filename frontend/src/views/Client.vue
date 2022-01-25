@@ -10,8 +10,10 @@
             <label for="cifrc" class="form-label">CIFRC:</label>
             <div id="cifrc">
               <v-select 
+                :debounce="250"
                 :options="response_short"
                 @input="setSelectedShort"
+                :search="onSearch"
                 label="cifrc"
                 v-model="form.cifrc" 
                 v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
@@ -34,6 +36,26 @@
           </div>
         </div>
         
+
+  <h1>Vue Select - Ajax</h1>
+  <v-select label="nombre_razon_social" :filterable="false" :options="options" @search="onSearch">
+    <template slot="no-options">
+      Escribe para buscar clientes..
+    </template>
+    <template slot="option" slot-scope="option">
+      <div class="d-center">
+        <!-- <img :src='option.owner.avatar_url'/>  -->
+        {{ option.cifrc }}
+        </div>
+    </template>
+    <template slot="selected-option" slot-scope="option">
+      <div class="selected d-center">
+        <!-- <img :src='option.owner.avatar_url'/>  -->
+        {{ option.nombre_razon_social }}
+      </div>
+    </template>
+  </v-select>
+
         <!-- <div id="cifrc">
           <h1>Vue Select</h1>
           <v-select 
@@ -177,12 +199,15 @@
 <script>
 import vSelect from "vue-select"
 import "vue-select/dist/vue-select.css";
+import { mapActions } from 'vuex';
+import debounce from 'lodash/debounce';
+import axios from 'axios';
 
 export default {
   name: 'Albaran',
   data() {
     return {
-
+      options: [],
       response_short: [
         {
             "id": 53,
@@ -262,9 +287,26 @@ export default {
     };
   },
   methods : {
-    // selectedOption(){
-    //   console.log("here")
-    // },
+
+    ...mapActions(['getClients']),
+
+    onSearchCifrc(search, loading) {
+      if(search.length) {
+        loading(true);
+        let path = 
+        this.search(loading, search, this);
+      }
+    },
+    search: debounce((loading, search, vm) => {
+      fetch(
+        // `https://api.github.com/search/repositories?q=${escape(search)}`
+       ` http://127.0.0.1:8000/api/clients/short/?cifrc=${escape(search)}`
+      ).then(res => {
+        res.json().then(json => (vm.options = json.results));
+        loading(false);
+      });
+    }, 350),
+  
     setSelectedShort(value){
         if(value != null){
           this.form.cifrc = value.cifrc
@@ -313,6 +355,7 @@ export default {
       //  }
     },
     validInputTexts : function(field) {
+      console.log('rakata')
       if (field !== '' && field !== null){ 
         let _return = false;
         if (field.length > 0){
