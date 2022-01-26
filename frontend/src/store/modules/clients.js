@@ -1,20 +1,28 @@
 import axios from 'axios';
 
-const state = {
-  clients: null,
-};
+// const state = {
+//   clients: null,
+// };
 
-const getters = {
-  clients = state => state.clients
-};
+// const getters = {
+//   clients = state => state.clients
+// };
 
 const headers = {'Access-Control-Allow-Origin': '*'}
 
 const actions = {
-  async getClients({commit}) {
-    let userLogin = await axios.post('api/clients', headers);
-    await commit('chargeClients', userLogin.data);
-    // await dispatch('viewMe', userLogin);
+  getClients(cifrc) {
+    axios
+    .get(`/api/clients/short/?cifrc=${cifrc}`, headers)
+    .then(
+      response => {
+        return response.data.results
+      } 
+    ).catch(
+      error => {
+        console.log(error)
+        return []
+      })
   },
 
   // async viewMe({commit}, userLogin) {
@@ -32,15 +40,15 @@ const actions = {
   // }
 };
 
-const mutations = {
-  chargeClients(state, clients) {
-    state.clients = clients;
-  },
-};
+// const mutations = {
+//   chargeClients(state, clients) {
+//     state.clients = clients;
+//   },
+// };
 
 export default {
-  state,
-  getters,
+  // state,
+  // getters,
   actions,
-  mutations
+  // mutations
 };

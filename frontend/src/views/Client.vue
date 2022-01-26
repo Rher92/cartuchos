@@ -9,64 +9,63 @@
           <div class="col-md col-sm form-group">
             <label for="cifrc" class="form-label">CIFRC:</label>
             <div id="cifrc">
-              <v-select 
-                :debounce="250"
-                :options="response_short"
-                @input="setSelectedShort"
-                :search="onSearch"
+              <v-select
                 label="cifrc"
-                v-model="form.cifrc" 
+                :debounce="250"
+                :filterable="false"
+                :options="options"
+                @input="setSelectedShort"
+                @search="onSearchCifrc"
+                v-model="form.cifrc"
                 v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
                 v-on:blur="fieldsBlured = true">
-              ></v-select>
+                <template slot="no-options">
+                  Escribe para buscar clientes..
+                </template>
+                <template slot="option" slot-scope="option">
+                  <div class="d-center">
+                    {{ option.cifrc }}
+                    </div>
+                </template>
+                <template slot="selected-option" slot-scope="option">
+                  <div class="selected d-center">
+                    {{ option.cifrc }}
+                  </div>
+                </template>
+              </v-select>
               <div class="invalid-feedback">CIFRC es requerido</div>
             </div>
           </div>
           <div class="col-md col-sm form-group">
             <label for="name" class="form-label">Nombre:</label>
-              <v-select 
-                :options="response_short"
-                @input="setSelectedShort"
+              <v-select
                 label="nombre_razon_social"
-                v-model="form.name" 
-                v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
+                :debounce="250"
+                @input="setSelectedShort"
+                @search="onSearchNombre"
+                :filterable="false"
+                :options="options"
+                v-model="form.name"
+                v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.nombre_razon_social)  && form.fieldsBlured}"
                 v-on:blur="fieldsBlured = true">
-              ></v-select>
+                <template slot="no-options">
+                  Escribe para buscar clientes..
+                </template>
+                <template slot="option" slot-scope="option">
+                  <div class="d-center">
+                    {{ option.nombre_razon_social }}
+                    </div>
+                </template>
+                <template slot="selected-option" slot-scope="option">
+                  <div class="selected d-center">
+                    {{ option.nombre_razon_social }}
+                  </div>
+                </template>
+              </v-select>
             <div class="invalid-feedback">Nombre es requerido</div>
           </div>
         </div>
-        
 
-  <h1>Vue Select - Ajax</h1>
-  <v-select label="nombre_razon_social" :filterable="false" :options="options" @search="onSearch">
-    <template slot="no-options">
-      Escribe para buscar clientes..
-    </template>
-    <template slot="option" slot-scope="option">
-      <div class="d-center">
-        <!-- <img :src='option.owner.avatar_url'/>  -->
-        {{ option.cifrc }}
-        </div>
-    </template>
-    <template slot="selected-option" slot-scope="option">
-      <div class="selected d-center">
-        <!-- <img :src='option.owner.avatar_url'/>  -->
-        {{ option.nombre_razon_social }}
-      </div>
-    </template>
-  </v-select>
-
-        <!-- <div id="cifrc">
-          <h1>Vue Select</h1>
-          <v-select 
-            :options="response_large"
-            @input="setSelected"
-            label="cifrc"
-            v-model="form.cifrc" 
-            v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
-            v-on:blur="fieldsBlured = true">
-          ></v-select>
-        </div> -->
 
         <!-- INFORMACION -->
         <div class="row" style="margin-top: 15px">
@@ -104,6 +103,7 @@
               <span class="input-group-text" id="basic-addon3" v-else>{{form.rate}}</span>
           </div>
         </div>
+
 
         <!-- DESCARTABLES -->
         <div class="row" style="margin-top: 15px">
@@ -203,59 +203,12 @@ import { mapActions } from 'vuex';
 import debounce from 'lodash/debounce';
 import axios from 'axios';
 
+
 export default {
   name: 'Albaran',
   data() {
     return {
       options: [],
-      response_short: [
-        {
-            "id": 53,
-            "cifrc": "b99456931",
-            "nombre_razon_social": "365 vozes s.l."
-        },
-        {
-            "id": 54,
-            "cifrc": "b29750445",
-            "nombre_razon_social": "3b intermatic sl"
-        },
-      ],
-      response_large: [
-          {
-              "id": 53,
-              "cifrc": "b99456931",
-              "direccion": "calle  escritor josé donoso, 11 ",
-              "telefono": "876 030 299",
-              "persona_contacto": "",
-              "email": "agarcia@365vozes.com",
-              "nombre_razon_social": {
-                  "nombre": "365 vozes s.l."
-              },
-              "contrato_firmado": {
-                  "nombre": "false"
-              },
-              "clasificacion": {
-                  "nombre": "c*"
-              }
-          },
-        {
-            "id": 54,
-            "cifrc": "b29750445",
-            "direccion": "avda. ricardo soriano, 36, 1",
-            "telefono": "34 952 82 65 51",
-            "persona_contacto": "",
-            "email": "comercial@3bgrupo.com",
-            "nombre_razon_social": {
-                "nombre": "3b intermatic sl"
-            },
-            "contrato_firmado": {
-                "nombre": "false"
-            },
-            "clasificacion": {
-                "nombre": "c*"
-            }
-        }
-      ],
 
       form: {
         fieldsBlured : false,
@@ -287,55 +240,89 @@ export default {
     };
   },
   methods : {
-
     ...mapActions(['getClients']),
 
     onSearchCifrc(search, loading) {
       if(search.length) {
         loading(true);
-        let path = 
-        this.search(loading, search, this);
+        var ep = `/api/clients/short/?cifrc=${search}`
+        this.search(loading, ep, this)
       }
     },
-    search: debounce((loading, search, vm) => {
-      fetch(
-        // `https://api.github.com/search/repositories?q=${escape(search)}`
-       ` http://127.0.0.1:8000/api/clients/short/?cifrc=${escape(search)}`
-      ).then(res => {
-        res.json().then(json => (vm.options = json.results));
-        loading(false);
-      });
+
+    onSearchNombre(search, loading) {
+      if(search.length) {
+        loading(true);
+        var ep = `/api/clients/short/?nombre_razon_social__nombre=${search}`
+        this.search(loading, ep, this);
+      }
+    },
+
+    getClientFull(id, form) {
+        var ep = `http://127.0.0.1:8000/api/clients/${id}`
+        fetch(ep, {
+            method: 'get',
+            // headers: {
+            //   "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            // },
+          })
+          .then(res => {
+            res.json().then( json =>(
+              console.log('Request succeeded with JSON response', json),
+              form.address = json.direccion,
+              form.telephone = json.telefono,
+              form.email = json.email,
+              form.contact = json.persona_contacto,
+              form.rate = json.clasificacion.nombre,
+              form.number = json.id)
+            )
+          })
+          .catch(function (error) {
+            console.log('Request failed', error);
+          });
+    },
+
+    search: debounce((loading, ep, vm) => {
+      axios
+      .get(ep)
+      .then(
+        response => {
+          vm.options = response.data.results
+          // vm.options = this.getClients(search);  why it does not work.
+        } 
+      ).catch(
+        error => {
+          console.log(error)
+        })
+      loading(false);
     }, 350),
-  
+
     setSelectedShort(value){
         if(value != null){
           this.form.cifrc = value.cifrc
           this.form.name = value.nombre_razon_social
+          this.form.number = value.id
+          this.getClientFull(value.id, this.form)
         } else {
           for (let items in this.form){
             this.form[items] = ''
           }
         } 
     },
-    setSelected(value)
-    {
-      if(value != null){
-        this.form.cifrc = value.cifrc
-        this.form.name = value.nombre_razon_social.nombre
-        this.form.number = value.nombre_razon_social.nombre
-        this.form.address = value.direccion
-        this.form.telephone = value.telefono
-        this.form.email = value.email
-        this.form.contact = value.persona_contacto
-        this.form.rate = value.clasificacion.nombre
-        this.form.number = value.id
-      }else{
-        for (let items in this.form){
-          this.form[items] = ''
-        }
-      }
 
-    },
+    // setSelected(value){
+    //     let data = this.getClientFull(value)
+    //     console.log(data)
+    //     this.form.address = data.direccion
+    //     this.form.telephone = data.telefono
+    //     this.form.email = data.email
+    //     this.form.contact = data.persona_contacto
+    //     this.form.rate = data.clasificacion.nombre
+    //     this.form.number = data.id
+    //   },
+
+    
+
     validate : function(){
       this.form.fieldsBlured = true;
 
@@ -354,9 +341,9 @@ export default {
       //     this.valid = true;
       //  }
     },
+
     validInputTexts : function(field) {
-      console.log('rakata')
-      if (field !== '' && field !== null){ 
+      if (field !== '' && field !== null && field !== undefined){ 
         let _return = false;
         if (field.length > 0){
           _return = true
@@ -364,8 +351,9 @@ export default {
         return _return;
         }
     },
+    
     validInputNumber : function(field) {
-      if (field !== '' && field !== null){ 
+      if (field !== '' && field !== null && field !== undefined){ 
         let _return = false;
         if (field > 0){
           _return = true
@@ -373,29 +361,14 @@ export default {
         return _return;
       }
     },
-    submit : function(){
-        this.validate();
-        if(this.form.valid){
-          //THIS IS WHERE YOU SUBMIT DATA TO SERVER
-          this.form.submitted = true;
-        }
-      } //end submit
+
   },
-  // methods: {
-  //   ...mapActions(['logIn']),
-  //   async submit() {
-  //     const User = new FormData();
-  //     User.append('username', this.form.username);
-  //     User.append('password', this.form.password);
-  //     await this.logIn(User);
-  //     this.$router.push('/profile').catch((e) => console.log(e));;
-  //   }
-  // }
+
   components:{
     vSelect
   },
-}
 
+}
 
 </script>
 

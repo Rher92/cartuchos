@@ -57,3 +57,10 @@ The following details how to deploy this application.
 ### Docker
 
 See detailed [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html).
+
+
+### Info
+https://codepen.io/sagalbot/pen/POMeOX
+https://vue-select.org/
+https://testdriven.io/blog/developing-a-single-page-app-with-fastapi-and-vuejs/#vuex
+https://vuex.vuejs.org/#what-is-a-state-management-pattern
