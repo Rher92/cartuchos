@@ -208,6 +208,7 @@ export default {
   name: 'Albaran',
   data() {
     return {
+      endpoint: process.env.VUE_APP_BASE_URL,
       options: [],
 
       form: {
@@ -259,7 +260,7 @@ export default {
     },
 
     getClientFull(id, form) {
-        var ep = `http://127.0.0.1:8000/api/clients/${id}`
+        var ep = `${this.endpoint}/api/clients/${id}`
         fetch(ep, {
             method: 'get',
             // headers: {

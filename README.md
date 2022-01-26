@@ -64,3 +64,4 @@ https://codepen.io/sagalbot/pen/POMeOX
 https://vue-select.org/
 https://testdriven.io/blog/developing-a-single-page-app-with-fastapi-and-vuejs/#vuex
 https://vuex.vuejs.org/#what-is-a-state-management-pattern
+https://dev.to/ratracegrad/how-to-use-environment-variables-in-vue-js-4ko7
