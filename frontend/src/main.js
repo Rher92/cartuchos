@@ -7,7 +7,7 @@ import router from './router';
 import store from './store';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:8000/';  //  backend
+axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
 
 Vue.config.productionTip = false;
 
