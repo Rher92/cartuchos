@@ -21,7 +21,6 @@ class ClientsViewSet(mixins.ListModelMixin,
     serializer_class = ClientAllSerializer
     queryset = Cliente.objects.all()
     filter_backends = [DjangoFilterBackend]
-    filter_backends = [DjangoFilterBackend]
     filterset_fields = ['cifrc', 'nombre_razon_social__nombre']
 
     def get_serializer_class(self):

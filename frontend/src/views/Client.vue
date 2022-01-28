@@ -192,6 +192,73 @@
         <button type="submit" class="btn btn-primary " style="margin-top: 15px; margin-bottom: 15px;">Siguiente</button>
       </div>
 
+
+
+  <div>
+   <b-form-group
+      label="Selection mode:"
+      label-for="table-select-mode-select"
+      label-cols-md="4"
+    >
+      <b-form-select
+        id="table-select-mode-select"
+        v-model="selectMode"
+        :options="modes"
+        class="mb-3"
+      ></b-form-select>
+    </b-form-group>
+
+    <b-table
+      :items="cartridge.items"
+      :fields="cartridge.fields"
+      :select-mode="selectMode"
+      responsive="sm"
+      ref="selectableTable"
+      selectable
+      @row-selected="onRowSelected"
+    >
+      <!-- Example scoped slot for select state illustrative purposes -->
+      <template #cell(selected)="{ rowSelected }">
+        <template v-if="rowSelected">
+          <span aria-hidden="true">&check;</span>
+          <!-- <span class="sr-only">Selected</span> -->
+        </template>
+        <template v-else>
+          <span aria-hidden="true">&nbsp;</span>
+          <!-- <span class="sr-only">Not selected</span> -->
+        </template>
+      </template>
+    </b-table>
+    <p>
+      <b-button size="sm" @click="selectAllRows">Select all</b-button>
+      <b-button size="sm" @click="clearSelected">Clear selected</b-button>
+    </p>
+    <p>
+      Selected Rows:<br>
+      {{ selected }}
+    </p>
+  </div>
+
+
+
+    <div class="overflow-auto">
+    <!-- Use text in props -->
+      <b-pagination
+        v-model="cartridge.currentPage"
+        @input= "updatePage(cartridge.currentPage)"
+        :total-rows="cartridge.rows"
+        :per-page="cartridge.perPage"
+        first-text="First"
+        prev-text="Prev"
+        next-text="Next"
+        last-text="Last"
+      ></b-pagination>
+    </div>
+
+
+
+
+
     </form>
   </section>
 </template>
@@ -206,10 +273,37 @@ import axios from 'axios';
 
 export default {
   name: 'Albaran',
+
   data() {
     return {
       endpoint: process.env.VUE_APP_BASE_URL,
       options: [],
+
+        modes: ['multi', 'single', 'range'],
+        // _fields: ['selected', 'familia', 'subfamilia', 'modelo', 'referencia', 'peso', 'marca', 'codigo'],
+        fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
+        items: [
+          { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+          { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+          { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+          { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
+        ],
+        // _items: [],
+        selectMode: 'multi',
+        selected: [],
+
+      cartridge: {
+        next_cartridge: '',
+        previous_cartridge: '',
+        total: '',
+        fields: ['selected', 'familia', 'subfamilia', 'modelo', 'referencia', 'peso', 'marca', 'codigo'],
+        items: [],
+        selected: [],
+        rows: '',
+        perPage: '',
+        currentPage: '',
+      },
+
 
       form: {
         fieldsBlured : false,
@@ -240,6 +334,7 @@ export default {
       }
     };
   },
+
   methods : {
     ...mapActions(['getClients']),
 
@@ -283,6 +378,51 @@ export default {
           });
     },
 
+    getCartridges(page=null){
+      console.log("heeeeere")
+        var ep = `${this.endpoint}/api/cartridges`
+        if (page !== null){
+          ep = `${this.endpoint}/api/cartridges/${page}`
+        }
+        
+
+
+        fetch(ep, {
+            method: 'get',
+            // headers: {
+            //   "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            // },
+          })
+          .then(res => {
+            res.json().then( json =>(
+                console.log('Request succeeded with JSON response', json),
+                this.cartridge.next_cartridge = json.next,
+                this.cartridge.previous_cartridge = json.previous,
+                this.cartridge.total = json.count,
+            
+                this.cartridge.items = json.results,
+
+                this.cartridge.rows = this.cartridge.total,
+                this.cartridge.perPage = json.results.length,
+                this.cartridge.currentPage = 1
+
+              )
+            )
+          })
+          .catch(function (error) {
+            console.log('Request failed', error);
+          });
+    },
+
+    updatePage(currentPage){
+      var page = null
+      if (currentPage > 1){
+        page = currentPage
+      }
+      console.log('here')
+      this.getCartridges(page)
+    },
+
     search: debounce((loading, ep, vm) => {
       axios
       .get(ep)
@@ -322,7 +462,6 @@ export default {
     //     this.form.number = data.id
     //   },
 
-    
 
     validate : function(){
       this.form.fieldsBlured = true;
@@ -363,10 +502,34 @@ export default {
       }
     },
 
+
+      onRowSelected(items) {
+        this.selected = items
+      },
+      selectAllRows() {
+        this.$refs.selectableTable.selectAllRows()
+      },
+      clearSelected() {
+        this.$refs.selectableTable.clearSelected()
+      },
+      selectThirdRow() {
+        // Rows are indexed from 0, so the third row is index 2
+        this.$refs.selectableTable.selectRow(2)
+      },
+      unselectThirdRow() {
+        // Rows are indexed from 0, so the third row is index 2
+        this.$refs.selectableTable.unselectRow(2)
+      },
+
   },
 
   components:{
     vSelect
+  },
+
+  mounted() {
+    console.log(this.$el.querySelectorAll('a'));
+    this.getCartridges()
   },
 
 }
