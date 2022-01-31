@@ -7,7 +7,7 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 
-
+from .paginations.paginations import ShortCartridgeResultsPagination
 from cartridge.models import Cartridges
 from .serializers.cartridge import CartridgesSerializer
 
@@ -21,4 +21,5 @@ class CartridgeViewSet(mixins.ListModelMixin,
     queryset = Cartridges.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_fields = []
+    pagination_class = ShortCartridgeResultsPagination
     
