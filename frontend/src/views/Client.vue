@@ -235,7 +235,8 @@
     </p>
     <p>
       Selected Rows:<br>
-      {{ selected }}
+      {{ cartridge.selected }}
+      {{ cartridge.items_selected }}
     </p>
   </div>
 
@@ -298,6 +299,7 @@ export default {
         total: '',
         fields: ['selected', 'familia', 'subfamilia', 'modelo', 'referencia', 'peso', 'marca', 'codigo'],
         items: [],
+        items_selected: [],
         selected: [],
         rows: '',
         perPage: '',
@@ -364,7 +366,7 @@ export default {
           })
           .then(res => {
             res.json().then( json =>(
-              console.log('Request succeeded with JSON response', json),
+              // console.log('Request succeeded with JSON response', json),
               form.address = json.direccion,
               form.telephone = json.telefono,
               form.email = json.email,
@@ -378,15 +380,8 @@ export default {
           });
     },
 
-    getCartridges(page=null){
-      console.log("heeeeere")
+    getCartridgesOnMount(){
         var ep = `${this.endpoint}/api/cartridges`
-        if (page !== null){
-          ep = `${this.endpoint}/api/cartridges/${page}`
-        }
-        
-
-
         fetch(ep, {
             method: 'get',
             // headers: {
@@ -414,12 +409,44 @@ export default {
           });
     },
 
+    getCartridges(page=null){
+        var ep = `${this.endpoint}/api/cartridges`
+        if (page !== null){
+          ep = `${this.endpoint}/api/cartridges/?page=${page}`
+        }
+
+        this.cartridge.selected.forEach(element => {
+          this.cartridge.items_selected.push(element)
+        });
+        
+        fetch(ep, {
+            method: 'get',
+            // headers: {
+            //   "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            // },
+          })
+          .then(res => {
+            res.json().then( json =>(
+                console.log('Request succeeded with JSON response', json),
+                this.cartridge.next_cartridge = json.next,
+                this.cartridge.previous_cartridge = json.previous,
+                this.cartridge.total = json.count,
+            
+                this.cartridge.items = json.results
+
+              )
+            )
+          })
+          .catch(function (error) {
+            console.log('Request failed', error);
+          });
+    },
+
     updatePage(currentPage){
       var page = null
       if (currentPage > 1){
         page = currentPage
       }
-      console.log('here')
       this.getCartridges(page)
     },
 
@@ -502,9 +529,8 @@ export default {
       }
     },
 
-
       onRowSelected(items) {
-        this.selected = items
+        this.cartridge.selected = items
       },
       selectAllRows() {
         this.$refs.selectableTable.selectAllRows()
@@ -528,8 +554,8 @@ export default {
   },
 
   mounted() {
-    console.log(this.$el.querySelectorAll('a'));
-    this.getCartridges()
+    // console.log(this.$el.querySelectorAll('a'));
+    this.getCartridgesOnMount()
   },
 
 }
