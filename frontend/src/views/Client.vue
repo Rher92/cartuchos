@@ -310,6 +310,7 @@ export default {
         fields: ['selected', 'familia', 'subfamilia', 'modelo', 'referencia', 'peso', 'marca', 'codigo'],
         items: [],
         items_selected: [],
+        items_selected_ids: [],
         selected: [],
         rows: '',
         perPage: '',
@@ -410,6 +411,7 @@ export default {
         if (filter == true){
           ep = `${this.endpoint}/api/cartridges/?${this.subfamily.filter}&${this.family.filter}`
         }
+        
         fetch(ep, {
             method: 'get',
             // headers: {
@@ -418,7 +420,7 @@ export default {
           })
           .then(res => {
             res.json().then( json =>(
-                console.log('Request succeeded with JSON response', json),
+                // console.log('Request succeeded with JSON response', json),
                 this.cartridge.next_cartridge = json.next,
                 this.cartridge.previous_cartridge = json.previous,
                 this.cartridge.total = json.count,
@@ -444,7 +446,10 @@ export default {
         }
 
         this.cartridge.selected.forEach(element => {
-          this.cartridge.items_selected.push(element)
+          if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
+            this.cartridge.items_selected.push(element)
+            this.cartridge.items_selected_ids.push(element.id)
+          }
         });
         
         fetch(ep, {
@@ -455,7 +460,7 @@ export default {
           })
           .then(res => {
             res.json().then( json =>(
-                console.log('Request succeeded with JSON response', json),
+                // console.log('Request succeeded with JSON response', json),
                 this.cartridge.next_cartridge = json.next,
                 this.cartridge.previous_cartridge = json.previous,
                 this.cartridge.total = json.count,
@@ -557,28 +562,34 @@ export default {
       }
     },
 
-      onRowSelected(items) {
-        this.cartridge.selected = items
-      },
-      selectAllRows() {
-        this.$refs.selectableTable.selectAllRows()
-      },
-      clearSelected() {
-        this.$refs.selectableTable.clearSelected()
-      },
-      selectThirdRow() {
-        // Rows are indexed from 0, so the third row is index 2
-        this.$refs.selectableTable.selectRow(2)
-      },
-      unselectThirdRow() {
-        // Rows are indexed from 0, so the third row is index 2
-        this.$refs.selectableTable.unselectRow(2)
-      },
+    onRowSelected(items) {
+      this.cartridge.selected = items
+    },
+    selectAllRows() {
+      this.$refs.selectableTable.selectAllRows()
+    },
+    clearSelected() {
+      this.$refs.selectableTable.clearSelected()
+    },
+    selectThirdRow() {
+      // Rows are indexed from 0, so the third row is index 2
+      this.$refs.selectableTable.selectRow(2)
+    },
+    unselectThirdRow() {
+      // Rows are indexed from 0, so the third row is index 2
+      this.$refs.selectableTable.unselectRow(2)
+    },
 
     subFamilyFilter: function (event) {
       if (event != this.subfamily.last_selected) {
         this.subfamily.last_selected = event
         this.subfamily.filter = `family_intern__name=${event}`
+        this.cartridge.selected.forEach(element => {
+          if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
+            this.cartridge.items_selected.push(element)
+            this.cartridge.items_selected_ids.push(element.id)
+          }
+        });
         this.getCartridgesRecharge(true)
       }
     },
@@ -587,6 +598,12 @@ export default {
       if (event != this.family.last_selected) {
         this.family.last_selected = event
         this.family.filter = `family__name=${event}`
+        this.cartridge.selected.forEach(element => {
+          if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
+            this.cartridge.items_selected.push(element)
+            this.cartridge.items_selected_ids.push(element.id)
+          }
+        });
         this.getCartridgesRecharge(true)
       }
     },
