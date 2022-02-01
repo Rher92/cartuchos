@@ -196,17 +196,33 @@
 
   <div>
    <b-form-group
-      label="Selection mode:"
+      label="Subfamilia:"
       label-for="table-select-mode-select"
       label-cols-md="4"
     >
       <b-form-select
         id="table-select-mode-select"
-        v-model="selectMode"
-        :options="modes"
+        v-model="subfamily.selected"
+        :options="subfamily.items"
         class="mb-3"
+        v-on:change="subFamilyFilter"
       ></b-form-select>
     </b-form-group>
+
+  <b-form-group
+    label="familia:"
+    label-for="table-select-mode-select"
+    label-cols-md="4"
+  >
+    <b-form-select
+      id="table-select-mode-select"
+      v-model="family.selected"
+      :options="family.items"
+      class="mb-3"
+      v-on:change="FamilyFilter"
+    ></b-form-select>
+  </b-form-group>
+
 
     <b-table
       :items="cartridge.items"
@@ -240,8 +256,6 @@
     </p>
   </div>
 
-
-
     <div class="overflow-auto">
     <!-- Use text in props -->
       <b-pagination
@@ -255,10 +269,6 @@
         last-text="Last"
       ></b-pagination>
     </div>
-
-
-
-
 
     </form>
   </section>
@@ -306,6 +316,21 @@ export default {
         currentPage: '',
       },
 
+      filters: '',
+
+      subfamily: {
+        items: [],
+        selected: 'TODOS',
+        last_selected: 'TODOS',
+        filter: 'family_intern__name=TODOS'
+      },
+
+      family: {
+        items: [],
+        selected: 'TODOS',
+        last_selected: 'TODOS',
+        filter: 'family__name=TODOS'
+      },
 
       form: {
         fieldsBlured : false,
@@ -380,8 +405,11 @@ export default {
           });
     },
 
-    getCartridgesOnMount(){
+    getCartridgesRecharge(filter=false){
         var ep = `${this.endpoint}/api/cartridges`
+        if (filter == true){
+          ep = `${this.endpoint}/api/cartridges/?${this.subfamily.filter}&${this.family.filter}`
+        }
         fetch(ep, {
             method: 'get',
             // headers: {
@@ -410,9 +438,9 @@ export default {
     },
 
     getCartridges(page=null){
-        var ep = `${this.endpoint}/api/cartridges`
+        var ep = `${this.endpoint}/api/cartridges/?${this.subfamily.filter}&${this.family.filter}`
         if (page !== null){
-          ep = `${this.endpoint}/api/cartridges/?page=${page}`
+          ep = `${this.endpoint}/api/cartridges/?page=${page}&${this.subfamily.filter}&${this.family.filter}`
         }
 
         this.cartridge.selected.forEach(element => {
@@ -547,6 +575,60 @@ export default {
         this.$refs.selectableTable.unselectRow(2)
       },
 
+    subFamilyFilter: function (event) {
+      if (event != this.subfamily.last_selected) {
+        this.subfamily.last_selected = event
+        this.subfamily.filter = `family_intern__name=${event}`
+        this.getCartridgesRecharge(true)
+      }
+    },
+
+    FamilyFilter: function (event) {
+      if (event != this.family.last_selected) {
+        this.family.last_selected = event
+        this.family.filter = `family__name=${event}`
+        this.getCartridgesRecharge(true)
+      }
+    },
+
+    getSubFamilies: function(){
+        var ep = `${this.endpoint}/api/cartridges/subfamily_name`
+        fetch(ep, {
+            method: 'get',
+            // headers: {
+            //   "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            // },
+          })
+          .then(res => {
+            res.json().then( json =>(
+                this.subfamily.items = json
+              )
+            )
+          })
+          .catch(function (error) {
+            console.log('Request failed', error);
+          });
+    },
+
+    getFamilies: function(){
+        var ep = `${this.endpoint}/api/cartridges/family_name`
+        fetch(ep, {
+            method: 'get',
+            // headers: {
+            //   "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            // },
+          })
+          .then(res => {
+            res.json().then( json =>(
+                this.family.items = json
+              )
+            )
+          })
+          .catch(function (error) {
+            console.log('Request failed', error);
+          });
+    }
+
   },
 
   components:{
@@ -555,7 +637,9 @@ export default {
 
   mounted() {
     // console.log(this.$el.querySelectorAll('a'));
-    this.getCartridgesOnMount()
+    this.getCartridgesRecharge()
+    this.getSubFamilies()
+    this.getFamilies()
   },
 
 }
