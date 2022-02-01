@@ -223,6 +223,14 @@
     ></b-form-select>
   </b-form-group>
 
+  <b-form-group
+    label="Filtro general:"
+    label-cols-md="4"
+  >
+
+    <b-form-input class="w-25 p-3" v-on:input="generalFilter" v-model="general_filters" type="search" placeholder="Escribe al menos 4 letras">
+    </b-form-input>
+  </b-form-group>
 
     <b-table
       :items="cartridge.items"
@@ -317,7 +325,7 @@ export default {
         currentPage: '',
       },
 
-      filters: '',
+      general_filters: '',
 
       subfamily: {
         items: [],
@@ -605,6 +613,12 @@ export default {
           }
         });
         this.getCartridgesRecharge(true)
+      }
+    },
+
+    generalFilter: function () {
+      if (this.general_filters.length > 3){
+        console.log(this.general_filters)
       }
     },
 
