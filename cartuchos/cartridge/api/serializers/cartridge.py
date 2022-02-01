@@ -1,7 +1,12 @@
 from rest_framework import serializers
 
-from cartridge.models import Cartridges
+from cartridge.models import Cartridges, SubFamily
 
+
+class SubFamilySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubFamily
+        fields = '__all__'
 
 class CartridgesSerializer(serializers.ModelSerializer):
     familia = serializers.SerializerMethodField()
