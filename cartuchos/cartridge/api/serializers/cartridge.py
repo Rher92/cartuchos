@@ -11,6 +11,7 @@ class CartridgesSerializer(serializers.ModelSerializer):
     color = serializers.SerializerMethodField()
     peso = serializers.SerializerMethodField()
     codigo = serializers.SerializerMethodField()
+    modelo = serializers.SerializerMethodField()
 
     class Meta:
         model = Cartridges
@@ -22,7 +23,8 @@ class CartridgesSerializer(serializers.ModelSerializer):
             "familia",
             "subfamilia",
             "referencia",
-            "marca"
+            "marca",
+            "modelo"
         ]
         
     def get_familia(self, obj):
@@ -37,12 +39,6 @@ class CartridgesSerializer(serializers.ModelSerializer):
             _return = obj.family_intern.name
         return _return
         
-    def get_referencia(self, obj):
-        _return = None
-        if hasattr(obj, 'reference'):
-            _return = obj.reference.name
-        return _return
-        
     def get_marca(self, obj):
         _return = None
         if hasattr(obj, 'manufacturer'):
@@ -53,6 +49,18 @@ class CartridgesSerializer(serializers.ModelSerializer):
         _return = None
         if hasattr(obj, 'color'):
             _return = obj.color.name
+        return _return
+
+    def get_modelo(self, obj):
+        _return = None
+        if hasattr(obj, 'reference'):
+            _return = obj.reference.name
+        return _return
+    
+    def get_referencia(self, obj):
+        _return = None
+        if hasattr(obj, 'color'):
+            _return = obj.reference_group.name
         return _return
         
     def get_codigo(self, obj):
