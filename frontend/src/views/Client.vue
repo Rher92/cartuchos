@@ -629,6 +629,12 @@ export default {
       } else {
         this.general_filters.query = ''
       }
+      this.cartridge.selected.forEach(element => {
+        if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
+          this.cartridge.items_selected.push(element)
+          this.cartridge.items_selected_ids.push(element.id)
+        }
+      });
       this.getCartridgesRecharge(true)
     },
 
