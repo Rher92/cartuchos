@@ -228,7 +228,7 @@
     label-cols-md="4"
   >
 
-    <b-form-input class="w-25 p-3" v-on:input="generalFilter" v-model="general_filters" type="search" placeholder="Escribe al menos 4 letras">
+    <b-form-input class="w-25 p-3" v-on:input="generalFilter" v-model="general_filters.filter" type="search" placeholder="Escribe al menos 4 letras">
     </b-form-input>
   </b-form-group>
 
@@ -325,7 +325,10 @@ export default {
         currentPage: '',
       },
 
-      general_filters: '',
+      general_filters: {
+        filter: '',
+        query: ''
+      },
 
       subfamily: {
         items: [],
@@ -400,7 +403,6 @@ export default {
           })
           .then(res => {
             res.json().then( json =>(
-              // console.log('Request succeeded with JSON response', json),
               form.address = json.direccion,
               form.telephone = json.telefono,
               form.email = json.email,
@@ -419,6 +421,10 @@ export default {
         if (filter == true){
           ep = `${this.endpoint}/api/cartridges/?${this.subfamily.filter}&${this.family.filter}`
         }
+
+        if (this.general_filters.filter.length > 3){
+          ep = ep + `&${this.general_filters.query}`
+        }
         
         fetch(ep, {
             method: 'get',
@@ -428,7 +434,6 @@ export default {
           })
           .then(res => {
             res.json().then( json =>(
-                // console.log('Request succeeded with JSON response', json),
                 this.cartridge.next_cartridge = json.next,
                 this.cartridge.previous_cartridge = json.previous,
                 this.cartridge.total = json.count,
@@ -452,6 +457,9 @@ export default {
         if (page !== null){
           ep = `${this.endpoint}/api/cartridges/?page=${page}&${this.subfamily.filter}&${this.family.filter}`
         }
+        if (this.general_filters.filter.length > 3){
+          ep = ep + `&${this.general_filters.query}`
+        }
 
         this.cartridge.selected.forEach(element => {
           if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
@@ -468,7 +476,6 @@ export default {
           })
           .then(res => {
             res.json().then( json =>(
-                // console.log('Request succeeded with JSON response', json),
                 this.cartridge.next_cartridge = json.next,
                 this.cartridge.previous_cartridge = json.previous,
                 this.cartridge.total = json.count,
@@ -617,9 +624,12 @@ export default {
     },
 
     generalFilter: function () {
-      if (this.general_filters.length > 3){
-        console.log(this.general_filters)
+      if (this.general_filters.filter.length > 3){
+        this.general_filters.query = `&q=${this.general_filters.filter}`
+      } else {
+        this.general_filters.query = ''
       }
+      this.getCartridgesRecharge(true)
     },
 
     getSubFamilies: function(){
@@ -667,7 +677,6 @@ export default {
   },
 
   mounted() {
-    // console.log(this.$el.querySelectorAll('a'));
     this.getCartridgesRecharge()
     this.getSubFamilies()
     this.getFamilies()
