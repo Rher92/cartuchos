@@ -625,7 +625,7 @@ export default {
 
     generalFilter: function () {
       if (this.general_filters.filter.length > 3){
-        this.general_filters.query = `&q=${this.general_filters.filter}`
+        this.general_filters.query = `&search=${this.general_filters.filter}`
       } else {
         this.general_filters.query = ''
       }

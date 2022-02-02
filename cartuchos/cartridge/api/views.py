@@ -3,8 +3,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.authtoken.models import Token
-from rest_framework import mixins
-from rest_framework import status, viewsets
+from rest_framework import mixins, status, viewsets, filters
 from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -19,9 +18,16 @@ class CartridgeViewSet(mixins.ListModelMixin,
                        mixins.RetrieveModelMixin,
                        viewsets.GenericViewSet):
     queryset = Cartridges.objects.all()
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = []
     pagination_class = ShortCartridgeResultsPagination
+    search_fields = ['code',
+                     'reference__name',
+                     'reference_group__name',
+                     'weitgh',
+                     'manufacturer__name',
+                     'family_intern__name',
+                     'family__name']
     
     def get_serializer_class(self):
         """Return serializer based on action."""
