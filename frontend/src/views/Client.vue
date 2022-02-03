@@ -231,7 +231,7 @@
         label="Filtro general:"
         label-cols-md="4"
       >
-        <b-form-input class="w-75 p-1" v-on:input="generalFilter" v-model="general_filters.filter" type="search" placeholder="Escribe al menos 4 letras">
+        <b-form-input class="w-75 p-1" v-on:input="generalFilter" v-model="general_filters.filter" type="search" placeholder="Escribe al menos 1 caracter">
         </b-form-input>
       </b-form-group>
     </div>
@@ -631,7 +631,7 @@ export default {
     },
 
     generalFilter: function () {
-      if (this.general_filters.filter.length > 3){
+      if (this.general_filters.filter.length >= 1){
         this.general_filters.query = `&search=${this.general_filters.filter}`
       } else {
         this.general_filters.query = ''
