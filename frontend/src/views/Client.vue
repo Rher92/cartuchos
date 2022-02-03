@@ -332,7 +332,7 @@ export default {
         selected: [],
         rows: '',
         perPage: '',
-        currentPage: '',
+        currentPage: 1,
       },
 
       general_filters: {
@@ -585,7 +585,7 @@ export default {
       this.cartridge.selected = items
       items.forEach(element =>{
           if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
-            let cantidad = 1
+            var cantidad = 1
             this.cartridge.items_selected_ids.push(element.id)
             this.selected_cartridge.items.push({
               'modelo': element.modelo,
