@@ -665,6 +665,7 @@ export default {
     removeRowHandler(index) {
         if (index > -1) {
           this.selected_cartridge.items.splice(index, 1); // 2nd parameter means remove one item only
+          this.cartridge.items_selected_ids.splice(index, 1);
         }
     },
   },
