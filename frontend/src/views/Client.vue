@@ -111,11 +111,7 @@
           <h3 class="text-center" style="margin: 5px">Descartables</h3>
           <div class="col-md col-sm form-group">
               <label for="salesman" class="form-label">Vendedor:</label>
-              <input 
-                v-model="form.salesman" 
-                v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.salesman)  && form.fieldsBlured}"
-                v-on:blur="fieldsBlured = true">
-              <div class="invalid-feedback">Vendedor es requerido</div>
+              <span class="input-group-text" id="basic-addon3">{{user.user.username}}</span>
           </div>
           <div class="col-md col-sm form-group">
             <label for="weight" class="form-label">Peso:</label>
@@ -320,6 +316,7 @@ import "vue-select/dist/vue-select.css";
 import { mapActions } from 'vuex';
 import debounce from 'lodash/debounce';
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 
 export default {
@@ -689,6 +686,10 @@ export default {
     this.getCartridgesRecharge()
     this.getSubFamilies()
     this.getFamilies()
+  },
+
+  computed: {
+    ...mapGetters({user: 'stateUser' })
   },
 
 }
