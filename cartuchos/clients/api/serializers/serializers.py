@@ -96,9 +96,10 @@ class TarifaAsignadaSerializer(serializers.ModelSerializer):
 
 
 class ClientLargeSerializer(serializers.ModelSerializer):
-    nombre_razon_social = NombreRazonSocialSerializer()
-    contrato_firmado = ContratoFirmadoSerializer()
-    clasificacion = ClasificacionSerializer()
+    nombre_razon_social = serializers.SerializerMethodField()
+    contrato_firmado = serializers.SerializerMethodField()
+    clasificacion = serializers.SerializerMethodField()
+    pais = serializers.SerializerMethodField()
     
     class Meta:
         model = Cliente
@@ -111,9 +112,33 @@ class ClientLargeSerializer(serializers.ModelSerializer):
             "email",
             "nombre_razon_social",
             "contrato_firmado",
-            "clasificacion"
+            "clasificacion",
+            "pais"
         ]
         
+    def get_clasificacion(self, obj):
+        _return = None
+        if hasattr(obj, 'clasificacion'):
+            _return = obj.clasificacion.nombre
+        return _return
+        
+    def get_contrato_firmado(self, obj):
+        _return = None
+        if hasattr(obj, 'contrato_firmado'):
+            _return = obj.contrato_firmado.nombre
+        return _return
+        
+    def get_nombre_razon_social(self, obj):
+        _return = None
+        if hasattr(obj, 'nombre_razon_social'):
+            _return = obj.nombre_razon_social.nombre
+        return _return
+        
+    def get_pais(self, obj):
+        _return = None
+        if hasattr(obj, 'pais'):
+            _return = obj.pais.nombre
+        return _return
 
 class ClientShortSerializer(serializers.ModelSerializer):
     nombre_razon_social = serializers.SerializerMethodField()

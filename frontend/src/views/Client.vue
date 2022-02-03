@@ -71,9 +71,9 @@
         <div class="row">
           <!-- <h3 class="text-center" style="margin: 5px">Información</h3> -->
           <div class="col-md col-sm form-group">
-              <label for="number" class="form-label">Número:</label>
-              <span class="input-group-text" id="basic-addon3 " v-if="!this.form.number">-</span>
-              <span class="input-group-text" id="basic-addon3 " v-else>{{form.number}}</span>
+              <label for="number" class="form-label">País:</label>
+              <span class="input-group-text" id="basic-addon3 " v-if="!this.form.country">-</span>
+              <span class="input-group-text" id="basic-addon3 " v-else>{{form.country}}</span>
           </div>
           <div class="col-md col-sm form-group">
               <label for="address" class="form-label">Dirección:</label>
@@ -386,6 +386,7 @@ export default {
         email: '',
         contact: '',
         rate: '',
+        country: '',
 
         // DESCARTABLES
         salesman: '',
@@ -433,8 +434,9 @@ export default {
               form.telephone = json.telefono,
               form.email = json.email,
               form.contact = json.persona_contacto,
-              form.rate = json.clasificacion.nombre,
-              form.number = json.id)
+              form.rate = json.clasificacion,
+              form.number = json.id,
+              form.country = json.pais)
             )
           })
           .catch(function (error) {
