@@ -68,8 +68,8 @@
 
 
         <!-- INFORMACION -->
-        <div class="row" style="margin-top: 15px">
-          <h3 class="text-center" style="margin: 5px">Información</h3>
+        <div class="row">
+          <!-- <h3 class="text-center" style="margin: 5px">Información</h3> -->
           <div class="col-md col-sm form-group">
               <label for="number" class="form-label">Número:</label>
               <span class="input-group-text" id="basic-addon3 " v-if="!this.form.number">-</span>
@@ -103,9 +103,10 @@
               <span class="input-group-text" id="basic-addon3" v-else>{{form.rate}}</span>
           </div>
         </div>
-
+      </div>
 
         <!-- DESCARTABLES -->
+        <div class="bg-light">
         <div class="row" style="margin-top: 15px">
           <h3 class="text-center" style="margin: 5px">Descartables</h3>
           <div class="col-md col-sm form-group">
@@ -188,49 +189,52 @@
         </div>
       </div>
 
-      <div class="col-md col-sm d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="submit" class="btn btn-primary " style="margin-top: 15px; margin-bottom: 15px;">Siguiente</button>
-      </div>
+   <!-- CARTUCHOS -->
+<div class="bg-light">
+  <h3 class="text-center" style="margin: 15px">Cartuchos</h3>
+  
+  <div class="row">
+    <div class="col-md col-sm form-group">
+      <b-form-group
+          label="Subfamilia:"
+          label-for="table-select-mode-select"
+          label-cols-md="4"
+        >
+          <b-form-select
+            id="table-select-mode-select"
+            v-model="subfamily.selected"
+            :options="subfamily.items"
+            class="mb-3"
+            v-on:change="subFamilyFilter"
+          ></b-form-select>
+        </b-form-group>
+    </div>
 
+    <div class="col-md col-sm form-group">
+      <b-form-group
+        label="familia:"
+        label-for="table-select-mode-select"
+        label-cols-md="4"
+      >
+        <b-form-select
+          id="table-select-mode-select"
+          v-model="family.selected"
+          :options="family.items"
+          class="mb-3"
+          v-on:change="FamilyFilter"
+        ></b-form-select>
+      </b-form-group>
+    </div>
 
-
-  <div>
-   <b-form-group
-      label="Subfamilia:"
-      label-for="table-select-mode-select"
-      label-cols-md="4"
-    >
-      <b-form-select
-        id="table-select-mode-select"
-        v-model="subfamily.selected"
-        :options="subfamily.items"
-        class="mb-3"
-        v-on:change="subFamilyFilter"
-      ></b-form-select>
-    </b-form-group>
-
-  <b-form-group
-    label="familia:"
-    label-for="table-select-mode-select"
-    label-cols-md="4"
-  >
-    <b-form-select
-      id="table-select-mode-select"
-      v-model="family.selected"
-      :options="family.items"
-      class="mb-3"
-      v-on:change="FamilyFilter"
-    ></b-form-select>
-  </b-form-group>
-
-  <b-form-group
-    label="Filtro general:"
-    label-cols-md="4"
-  >
-
-    <b-form-input class="w-25 p-3" v-on:input="generalFilter" v-model="general_filters.filter" type="search" placeholder="Escribe al menos 4 letras">
-    </b-form-input>
-  </b-form-group>
+    <div class="col-md col-sm form-group">
+      <b-form-group
+        label="Filtro general:"
+        label-cols-md="4"
+      >
+        <b-form-input class="w-75 p-1" v-on:input="generalFilter" v-model="general_filters.filter" type="search" placeholder="Escribe al menos 4 letras">
+        </b-form-input>
+      </b-form-group>
+    </div>
 
     <b-table
       :items="cartridge.items"
@@ -241,6 +245,11 @@
       selectable
       @row-selected="onRowSelected"
     >
+
+      <!-- <template v-slot:cell(codigo)="row">
+        <b-form-input v-model="row.item.codigo"/>
+      </template> -->
+
       <!-- Example scoped slot for select state illustrative purposes -->
       <template #cell(selected)="{ rowSelected }">
         <template v-if="rowSelected">
@@ -253,15 +262,39 @@
         </template>
       </template>
     </b-table>
-    <p>
-      <b-button size="sm" @click="selectAllRows">Select all</b-button>
-      <b-button size="sm" @click="clearSelected">Clear selected</b-button>
-    </p>
-    <p>
-      Selected Rows:<br>
-      {{ cartridge.selected }}
-      {{ cartridge.items_selected }}
-    </p>
+
+  </div>
+</div>
+
+  <!-- CARTUCHOS SELECCIONADOS -->
+<div class="bg-light" style="margin-top: 15px">
+    <h3 class="text-center">Cartuchos Seleccionados</h3>
+    <b-table
+      :items="selected_cartridge.items"
+      :fields="selected_cartridge.fields"
+      :select-mode="selectMode"
+      responsive="sm"
+      ref="selectableTable"
+      selectable
+      @row-selected="onRowSelected"
+    >
+
+      <!-- <template v-slot:cell(codigo)="row">
+        <b-form-input v-model="row.item.codigo"/>
+      </template> -->
+
+      <!-- Example scoped slot for select state illustrative purposes -->
+      <template #cell(selected)="{ rowSelected }">
+        <template v-if="rowSelected">
+          <span aria-hidden="true">&check;</span>
+          <!-- <span class="sr-only">Selected</span> -->
+        </template>
+        <template v-else>
+          <span aria-hidden="true">&nbsp;</span>
+          <!-- <span class="sr-only">Not selected</span> -->
+        </template>
+      </template>
+    </b-table>
   </div>
 
     <div class="overflow-auto">
@@ -277,7 +310,6 @@
         last-text="Last"
       ></b-pagination>
     </div>
-
     </form>
   </section>
 </template>
@@ -298,18 +330,12 @@ export default {
       endpoint: process.env.VUE_APP_BASE_URL,
       options: [],
 
-        modes: ['multi', 'single', 'range'],
-        // _fields: ['selected', 'familia', 'subfamilia', 'modelo', 'referencia', 'peso', 'marca', 'codigo'],
-        fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
-        items: [
-          { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-          { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-        ],
-        // _items: [],
-        selectMode: 'multi',
-        selected: [],
+      selectMode: 'multi',
+
+      selected_cartridge: {
+        'fields': ['modelo', 'peso', 'marca', 'cantidad','peso_total'],
+        'items': []
+      },
 
       cartridge: {
         next_cartridge: '',
@@ -460,13 +486,6 @@ export default {
         if (this.general_filters.filter.length > 3){
           ep = ep + `&${this.general_filters.query}`
         }
-
-        this.cartridge.selected.forEach(element => {
-          if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
-            this.cartridge.items_selected.push(element)
-            this.cartridge.items_selected_ids.push(element.id)
-          }
-        });
         
         fetch(ep, {
             method: 'get',
@@ -504,7 +523,6 @@ export default {
       .then(
         response => {
           vm.options = response.data.results
-          // vm.options = this.getClients(search);  why it does not work.
         } 
       ).catch(
         error => {
@@ -579,32 +597,27 @@ export default {
 
     onRowSelected(items) {
       this.cartridge.selected = items
-    },
-    selectAllRows() {
-      this.$refs.selectableTable.selectAllRows()
-    },
-    clearSelected() {
-      this.$refs.selectableTable.clearSelected()
-    },
-    selectThirdRow() {
-      // Rows are indexed from 0, so the third row is index 2
-      this.$refs.selectableTable.selectRow(2)
-    },
-    unselectThirdRow() {
-      // Rows are indexed from 0, so the third row is index 2
-      this.$refs.selectableTable.unselectRow(2)
+      items.forEach(element =>{
+        console.log(element)
+          if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
+            let cantidad = 1
+            this.cartridge.items_selected_ids.push(element.id)
+            this.selected_cartridge.items.push({
+              'modelo': element.modelo,
+              'marca': element.marca,
+              'peso': element.peso,
+              'cantidad': cantidad,
+              'peso_total': element.peso * cantidad,
+            })
+
+          }
+      })
     },
 
     subFamilyFilter: function (event) {
       if (event != this.subfamily.last_selected) {
         this.subfamily.last_selected = event
         this.subfamily.filter = `family_intern__name=${event}`
-        this.cartridge.selected.forEach(element => {
-          if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
-            this.cartridge.items_selected.push(element)
-            this.cartridge.items_selected_ids.push(element.id)
-          }
-        });
         this.getCartridgesRecharge(true)
       }
     },
@@ -613,12 +626,6 @@ export default {
       if (event != this.family.last_selected) {
         this.family.last_selected = event
         this.family.filter = `family__name=${event}`
-        this.cartridge.selected.forEach(element => {
-          if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
-            this.cartridge.items_selected.push(element)
-            this.cartridge.items_selected_ids.push(element.id)
-          }
-        });
         this.getCartridgesRecharge(true)
       }
     },
@@ -629,12 +636,6 @@ export default {
       } else {
         this.general_filters.query = ''
       }
-      this.cartridge.selected.forEach(element => {
-        if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
-          this.cartridge.items_selected.push(element)
-          this.cartridge.items_selected_ids.push(element.id)
-        }
-      });
       this.getCartridgesRecharge(true)
     },
 
@@ -691,5 +692,15 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  label{
+    margin-top: 15px;
+  }
+  h3{
+    margin-top: 5px;
+  }
+</style>
+
 
 
