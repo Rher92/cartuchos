@@ -272,26 +272,13 @@
       responsive="sm"
       ref="selectableTable"
       selectable
-      @row-selected="onRowSelected"
     >
-
-      <!-- <template v-slot:cell(codigo)="row">
-        <b-form-input v-model="row.item.codigo"/>
-      </template> -->
-
-      <!-- Example scoped slot for select state illustrative purposes -->
-      <template #cell(selected)="{ rowSelected }">
-        <template v-if="rowSelected">
-          <span aria-hidden="true">&check;</span>
-          <!-- <span class="sr-only">Selected</span> -->
-        </template>
-        <template v-else>
-          <span aria-hidden="true">&nbsp;</span>
-          <!-- <span class="sr-only">Not selected</span> -->
-        </template>
+      <template #cell(borrar)="row">
+        <b-button class="delete-button" variant="danger" @click="removeRowHandler(row.index)">X</b-button>
       </template>
     </b-table>
   </div>
+
 
     <div class="overflow-auto">
     <!-- Use text in props -->
@@ -330,7 +317,7 @@ export default {
       selectMode: 'multi',
 
       selected_cartridge: {
-        'fields': ['modelo', 'peso', 'marca', 'cantidad','peso_total'],
+        'fields': ['modelo', 'peso', 'marca', 'cantidad','peso_total', 'borrar'],
         'items': []
       },
 
@@ -597,7 +584,6 @@ export default {
     onRowSelected(items) {
       this.cartridge.selected = items
       items.forEach(element =>{
-        console.log(element)
           if (!(JSON.parse(JSON.stringify(this.cartridge.items_selected_ids.includes(element.id))))){
             let cantidad = 1
             this.cartridge.items_selected_ids.push(element.id)
@@ -674,8 +660,13 @@ export default {
           .catch(function (error) {
             console.log('Request failed', error);
           });
-    }
+    },
 
+    removeRowHandler(index) {
+        if (index > -1) {
+          this.selected_cartridge.items.splice(index, 1); // 2nd parameter means remove one item only
+        }
+    },
   },
 
   components:{
@@ -703,6 +694,12 @@ export default {
   h3{
     margin-top: 5px;
   }
+    .add-button {
+        margin-bottom: 10px;
+    }
+    .delete-button {
+        margin-left: 5px;
+    }
 </style>
 
 
