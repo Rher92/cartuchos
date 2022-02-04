@@ -434,7 +434,7 @@ export default {
           ep = `${this.endpoint}/api/cartridges/?${this.subfamily.filter}&${this.family.filter}`
         }
 
-        if (this.general_filters.filter.length > 3){
+        if (this.general_filters.filter.length >= 1){
           ep = ep + `&${this.general_filters.query}`
         }
         
