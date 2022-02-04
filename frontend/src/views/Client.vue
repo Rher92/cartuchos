@@ -337,7 +337,8 @@ export default {
 
       general_filters: {
         filter: '',
-        query: ''
+        query: '',
+        MIN_CHAR: 1
       },
 
       subfamily: {
@@ -434,7 +435,7 @@ export default {
           ep = `${this.endpoint}/api/cartridges/?${this.subfamily.filter}&${this.family.filter}`
         }
 
-        if (this.general_filters.filter.length >= 1){
+        if (this.general_filters.filter.length >= this.general_filters.MIN_CHAR){
           ep = ep + `&${this.general_filters.query}`
         }
         
@@ -469,7 +470,7 @@ export default {
         if (page !== null){
           ep = `${this.endpoint}/api/cartridges/?page=${page}&${this.subfamily.filter}&${this.family.filter}`
         }
-        if (this.general_filters.filter.length > 3){
+        if (this.general_filters.filter.length >= this.general_filters.MIN_CHAR){
           ep = ep + `&${this.general_filters.query}`
         }
         
@@ -616,7 +617,7 @@ export default {
     },
 
     generalFilter: function () {
-      if (this.general_filters.filter.length >= 1){
+      if (this.general_filters.filter.length >= this.general_filters.MIN_CHAR){
         this.general_filters.query = `&search=${this.general_filters.filter}`
       } else {
         this.general_filters.query = ''
