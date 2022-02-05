@@ -114,9 +114,9 @@
               <span class="input-group-text" id="basic-addon3">{{user.user.username}}</span>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="weight" class="form-label">Peso:</label>
+            <label for="weight" class="form-label">Peso Caja(Kg):</label>
             <input
-              type="number"
+              type="number" min="0"
               v-model="form.weight" 
               v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.weight)  && form.fieldsBlured}"
               v-on:blur="fieldsBlured = true">
@@ -125,61 +125,46 @@
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="laser_residual" class="form-label">Laser Residual:</label>
+            <label for="laser_residual" class="form-label">Laser Residual(%):</label>
             <input
-              type="number"
+              type="number" min="0" max="100"
               v-model="form.laser_residual" 
               v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.laser_residual)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
+              v-on:blur="fieldsBlured = true"
+              v-on:input="calculateWeightRemainingFromLaser">
             <div class="invalid-feedback">Laser Residual es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="inkject_residual" class="form-label">Inkject Residual:</label>
+            <label for="inkject_residual" class="form-label">Inkject Residual(%):</label>
             <input 
-              type="number"
+              type="number" min="0" max="100"
               v-model="form.inkject_residual" 
               v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.inkject_residual)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
+              v-on:blur="fieldsBlured = true"
+              v-on:input="calculateWeightRemainingFromInkjet">
             <div class="invalid-feedback">Inkject Residual es requerido</div>          
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
             <label for="laser_weight" class="form-label">Peso Laser(Kg):</label>
-            <input
-              type="number"
-              v-model="form.laser_weight" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.laser_weight)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
+              <span class="input-group-text" id="basic-addon3">{{form.laser_weight}}</span>
             <div class="invalid-feedback">Peso Laser es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
             <label for="inkjet_weight" class="form-label">Peso Inkject(Kg):</label>
-            <input
-              type="number"
-              v-model="form.inkjet_weight" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.inkjet_weight)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
-            <div class="invalid-feedback">Peso Inkject es requerido</div>
+            <span class="input-group-text" id="basic-addon3">{{form.inkjet_weight}}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
             <label for="total_items" class="form-label">Artículos en total:</label>
-            <input
-              type="number"
-              v-model="form.total_items" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.total_items)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
+              <span class="input-group-text" id="basic-addon3">{{form.total_items}}</span>
             <div class="invalid-feedback">Artículos en total es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="total_weight" class="form-label">Peso Total(Kg):</label>
-            <input
-              type="number"
-              v-model="form.total_weight" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.total_weight)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
+            <label for="total_weight" class="form-label">Peso Total Albaran(Kg):</label>
+              <span class="input-group-text" id="basic-addon3">{{form.total_weight}}</span>
             <div class="invalid-feedback">Peso Total es requerido</div>
           </div>
         </div>
@@ -290,7 +275,7 @@
         <template v-slot:cell(peso)="row">
           <div class="w-25">
             <template v-if="row.item.peso_total == 0 && selected_cartridge.weitgh_editable == false">
-              <b-form-input type="number" v-model="row.item.peso" @keyup.enter.native="setWeightCartridge(row.index)"/>
+              <b-form-input type="number" min="0" v-model="row.item.peso" @keyup.enter.native="setWeightCartridge(row.index)"/>
             </template>
             <template v-else>
               <span >{{row.item.peso}}</span>
@@ -300,7 +285,7 @@
 
         <template v-slot:cell(cantidad)="row">
           <div class="w-25">
-            <b-form-input type="number" v-model="row.item.cantidad" v-on:change="recalculateTotalWeightCartridge(row.index)"/>
+            <b-form-input type="number" min="0" v-model="row.item.cantidad" v-on:change="setWeightCartridge(row.index)"/>
           </div>
         </template>
 
@@ -334,9 +319,10 @@ export default {
       selectMode: 'multi',
 
       selected_cartridge: {
-        'fields': ['modelo', 'peso', 'marca', 'cantidad','peso_total', 'borrar'],
+        'fields': ['modelo', 'peso', 'marca', 'cantidad','peso_total', 'borrar', 'familia'],
         'items': [],
-        'weitgh_editable': false
+        'weitgh_editable': false,
+        'weitgh': 0
       },
 
       cartridge: {
@@ -393,13 +379,13 @@ export default {
 
         // DESCARTABLES
         salesman: '',
-        weight: '',
-        laser_residual: '',
-        inkject_residual: '',
-        laser_weight: '',
-        inkjet_weight: '',
-        total_weight: '',
-        total_items: '',
+        weight: 0,
+        laser_residual: 0,
+        inkject_residual: 0,
+        laser_weight: 0,
+        inkjet_weight: 0,
+        total_weight: 0,
+        total_items: 0,
       }
     };
   },
@@ -612,9 +598,10 @@ export default {
               'peso': element.peso,
               'cantidad': cantidad,
               'peso_total': element.peso * cantidad,
+              'familia': element.familia
             })
-
           }
+        this.calculateWeightTotals()
       })
     },
 
@@ -634,14 +621,65 @@ export default {
       }
     },
 
-    recalculateTotalWeightCartridge: function (index) {
-      let cartridge = this.selected_cartridge.items[index]
-      cartridge.peso_total = cartridge.peso * cartridge.cantidad
+    calculateWeightTotals: function(){
+      let cartridges = this.selected_cartridge.items
+      this.form.total_weight = 0
+      this.form.total_items = 0
+      this.form.inkjet_weight = 0
+      this.form.laser_weight = 0
+
+      cartridges.forEach(element =>{
+          this.form.total_weight += element.peso_total
+          this.form.total_items += parseInt(element.cantidad * element.peso)
+      })
+      this.calculateWeightRemaining()
+    },
+
+    calculateWeightRemainingFromInkjet: function(){
+      if(parseInt(this.form.inkject_residual) >= 100){
+          this.form.laser_residual = 0
+          this.form.inkject_residual = 100
+        } else if(this.form.inkject_residual == ''){
+            this.form.inkject_residual = 0
+            this.form.laser_residual = 100
+        } else {
+          this.form.laser_residual = 100 - parseInt(this.form.inkject_residual)
+        }
+      this.calculateWeightRemaining()
+    },
+
+    calculateWeightRemainingFromLaser: function(){
+      if(this.form.laser_residual >= 100){
+          this.form.inkject_residual = 0
+          this.form.laser_residual = 100
+        } else if(this.form.laser_residual == ''){
+            this.form.laser_residual = 0
+            this.form.inkject_residual = 100
+        } else {
+          this.form.inkject_residual = 100 - this.form.laser_residual
+        }
+        this.calculateWeightRemaining()
+    },
+
+    calculateWeightRemaining: function(){
+      if (parseInt(this.form.total_weight) < parseInt(this.form.weight)){
+        let remaining_weight = parseInt(this.form.weight) - parseInt(this.form.total_weight)
+        let inkject_percent = parseInt(this.form.inkject_residual) / 100
+        let laser_percent = parseInt(this.form.laser_residual) / 100
+        this.form.laser_weight = laser_percent * remaining_weight
+        this.form.inkjet_weight = inkject_percent * remaining_weight
+      } else {
+        this.form.laser_residual = 0
+        this.form.inkject_residual = 0
+        this.form.laser_weight = 0
+        this.form.inkjet_weight = 0
+      }
     },
 
     setWeightCartridge: function (index) {
       let cartridge = this.selected_cartridge.items[index]
       cartridge.peso_total = cartridge.peso * cartridge.cantidad
+      this.calculateWeightTotals()
     },
 
     generalFilter: function () {
@@ -696,6 +734,7 @@ export default {
           this.selected_cartridge.items.splice(index, 1); // 2nd parameter means remove one item only
           this.cartridge.items_selected_ids.splice(index, 1);
         }
+        this.calculateWeightTotals()
     },
   },
 
