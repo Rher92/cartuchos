@@ -217,7 +217,7 @@
           v-model="family.selected"
           :options="family.items"
           class="mb-3"
-          v-on:change="FamilyFilter"
+          v-on:change="familyFilter"
         ></b-form-select>
       </b-form-group>
     </div>
@@ -259,40 +259,57 @@
       </template>
     </b-table>
 
-  </div>
+    </div>
+        <div class="overflow-auto">
+      <!-- Use text in props -->
+        <b-pagination
+          v-model="cartridge.currentPage"
+          @input= "updatePage(cartridge.currentPage)"
+          :total-rows="cartridge.rows"
+          :per-page="cartridge.perPage"
+          first-text="First"
+          prev-text="Prev"
+          next-text="Next"
+          last-text="Last"
+        ></b-pagination>
+      </div>
 </div>
 
-  <!-- CARTUCHOS SELECCIONADOS -->
-<div class="bg-light" style="margin-top: 15px">
-    <h3 class="text-center">Cartuchos Seleccionados</h3>
-    <b-table
-      :items="selected_cartridge.items"
-      :fields="selected_cartridge.fields"
-      :select-mode="selectMode"
-      responsive="sm"
-      ref="selectableTable"
-      selectable
-    >
-      <template #cell(borrar)="row">
-        <b-button class="delete-button" variant="danger" @click="removeRowHandler(row.index)">X</b-button>
-      </template>
-    </b-table>
+    <!-- CARTUCHOS SELECCIONADOS -->
+  <div class="bg-light" style="margin-top: 15px">
+      <h3 class="text-center">Cartuchos Seleccionados</h3>
+      <b-table
+        :items="selected_cartridge.items"
+        :fields="selected_cartridge.fields"
+        :select-mode="selectMode"
+        responsive="sm"
+        ref="selectableTable"
+        selectable
+      >
+
+        <template v-slot:cell(peso)="row">
+          <div class="w-25">
+            <template v-if="row.item.peso_total == 0 && selected_cartridge.weitgh_editable == false">
+              <b-form-input type="number" v-model="row.item.peso" @keyup.enter.native="setWeightCartridge(row.index)"/>
+            </template>
+            <template v-else>
+              <span >{{row.item.peso}}</span>
+            </template>
+          </div>
+        </template>
+
+        <template v-slot:cell(cantidad)="row">
+          <div class="w-25">
+            <b-form-input type="number" v-model="row.item.cantidad" v-on:change="recalculateTotalWeightCartridge(row.index)"/>
+          </div>
+        </template>
+
+        <template #cell(borrar)="row">
+          <b-button class="delete-button" variant="danger" @click="removeRowHandler(row.index)">X</b-button>
+        </template>
+      </b-table>
   </div>
 
-
-    <div class="overflow-auto">
-    <!-- Use text in props -->
-      <b-pagination
-        v-model="cartridge.currentPage"
-        @input= "updatePage(cartridge.currentPage)"
-        :total-rows="cartridge.rows"
-        :per-page="cartridge.perPage"
-        first-text="First"
-        prev-text="Prev"
-        next-text="Next"
-        last-text="Last"
-      ></b-pagination>
-    </div>
     </form>
   </section>
 </template>
@@ -318,7 +335,8 @@ export default {
 
       selected_cartridge: {
         'fields': ['modelo', 'peso', 'marca', 'cantidad','peso_total', 'borrar'],
-        'items': []
+        'items': [],
+        'weitgh_editable': false
       },
 
       cartridge: {
@@ -608,12 +626,22 @@ export default {
       }
     },
 
-    FamilyFilter: function (event) {
+    familyFilter: function (event) {
       if (event != this.family.last_selected) {
         this.family.last_selected = event
         this.family.filter = `family__name=${event}`
         this.getCartridgesRecharge(true)
       }
+    },
+
+    recalculateTotalWeightCartridge: function (index) {
+      let cartridge = this.selected_cartridge.items[index]
+      cartridge.peso_total = cartridge.peso * cartridge.cantidad
+    },
+
+    setWeightCartridge: function (index) {
+      let cartridge = this.selected_cartridge.items[index]
+      cartridge.peso_total = cartridge.peso * cartridge.cantidad
     },
 
     generalFilter: function () {
