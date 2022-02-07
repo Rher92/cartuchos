@@ -26,13 +26,10 @@
           </ul>
           <ul v-else class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <router-link class="nav-link" to="/">Home</router-link>
+              <router-link class="nav-link" to="/">Pagina Principal</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/register">Register</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/login">Log In</router-link>
+              <router-link class="nav-link" to="/login">Iniciar sesión</router-link>
             </li>
           </ul>
         </div>
