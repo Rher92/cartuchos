@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form @submit.prevent="submit">
+    <form @submit.prevent="onSubmit">
       
       <!-- CLIENTE -->
       <div class="bg-light">
@@ -313,18 +313,22 @@
         <div>
           <b-form-textarea
             id="textarea"
-            v-model="text"
+            v-model="form.note"
             placeholder="Escriba nota adicional..."
             rows="3"
             max-rows="6"
           ></b-form-textarea>
-
-          <pre class="mt-3 mb-0">{{ form.note }}</pre>
         </div>
       </template>
     </div>
 
+    <div style="float:right; margin-top: 15px" class="">
+     <b-button type="submit" block variant="primary">Guardar Albaran</b-button>
+    </div>
+
     </form>
+
+
   </section>
 </template>
 
@@ -396,6 +400,7 @@ export default {
         submitted : false,
 
         // CLIENT
+        client_id: '',
         cifrc: '',
         name:'',
 
@@ -452,6 +457,7 @@ export default {
           })
           .then(res => {
             res.json().then( json =>(
+              form.client_id = json.id,
               form.address = json.direccion,
               form.telephone = json.telefono,
               form.email = json.email,
@@ -631,7 +637,8 @@ export default {
               'peso': element.peso,
               'cantidad': cantidad,
               'peso_total': element.peso * cantidad,
-              'familia': element.familia
+              'familia': element.familia,
+              'id': element.id
             })
           }
         this.calculateWeightTotals()
@@ -663,7 +670,7 @@ export default {
 
       cartridges.forEach(element =>{
           this.form.total_weight += element.peso_total
-          this.form.total_items += parseInt(element.cantidad * element.peso)
+          this.form.total_items += parseInt(element.cantidad)
       })
       this.calculateWeightRemaining()
     },
@@ -769,6 +776,38 @@ export default {
         }
         this.calculateWeightTotals()
     },
+
+    onSubmit(event) {
+      // console.log(JSON.stringify(this.form))
+      event.preventDefault()
+      // alert(JSON.stringify(this.form))
+
+      let cartridges = []
+      this.selected_cartridge.items.forEach(element => {
+        let item = {
+          'id': element.id,
+          'quantity': element.cantidad,
+          'weight': element.peso
+        }
+        cartridges.push(item)
+      })
+
+      let body = {
+        'client_id': this.form.client_id,
+        'salesman': this.user.user.pk,
+        'box_weight': parseInt(this.form.weight),
+        'laser_residual': this.form.laser_residual,
+        'inkject_residual': this.form.inkject_residual,
+        'laser_weight': this.form.laser_weight,
+        'inkjet_weight': this.form.inkjet_weight,
+        'total_weight': this.form.total_weight,
+        'total_items': this.form.total_items,
+        'note': this.form.note,
+        'cartridges': cartridges
+      }
+      console.log(body)
+    },
+
   },
 
   components:{
