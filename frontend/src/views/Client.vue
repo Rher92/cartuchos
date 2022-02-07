@@ -226,11 +226,6 @@
       selectable
       @row-selected="onRowSelected"
     >
-
-      <!-- <template v-slot:cell(codigo)="row">
-        <b-form-input v-model="row.item.codigo"/>
-      </template> -->
-
       <!-- Example scoped slot for select state illustrative purposes -->
       <template #cell(selected)="{ rowSelected }">
         <template v-if="rowSelected">
@@ -267,6 +262,8 @@
         :items="selected_cartridge.items"
         :fields="selected_cartridge.fields"
         :select-mode="selectMode"
+        :per-page="selected_cartridge.perPage"
+        :current-page="selected_cartridge.currentPage"
         responsive="sm"
         ref="selectableTable"
         selectable
@@ -293,7 +290,39 @@
           <b-button class="delete-button" variant="danger" @click="removeRowHandler(row.index)">X</b-button>
         </template>
       </b-table>
+
+        <div class="overflow-auto">
+      <!-- Use text in props -->
+        <b-pagination
+          v-model="selected_cartridge.currentPage"
+          @input= "selected_cartridge.currentPage"
+          :total-rows="selected_cartridge_rows"
+          :per-page="selected_cartridge.perPage"
+          first-text="First"
+          prev-text="Prev"
+          next-text="Next"
+          last-text="Last"
+        ></b-pagination>
+      </div>
+
   </div>
+
+    <div class="bg-light" style="margin-top: 15px">
+      <h3 class="text-center">Nota adicional</h3>
+      <template>
+        <div>
+          <b-form-textarea
+            id="textarea"
+            v-model="text"
+            placeholder="Escriba nota adicional..."
+            rows="3"
+            max-rows="6"
+          ></b-form-textarea>
+
+          <pre class="mt-3 mb-0">{{ form.note }}</pre>
+        </div>
+      </template>
+    </div>
 
     </form>
   </section>
@@ -319,7 +348,9 @@ export default {
       selectMode: 'multi',
 
       selected_cartridge: {
-        'fields': ['modelo', 'peso', 'marca', 'cantidad','peso_total', 'borrar', 'familia'],
+        perPage: 10,
+        currentPage: 1,
+        'fields': ['modelo', 'peso', 'marca', 'cantidad', 'peso_total', 'borrar', 'familia'],
         'items': [],
         'weitgh_editable': false,
         'weitgh': 0
@@ -386,6 +417,8 @@ export default {
         inkjet_weight: 0,
         total_weight: 0,
         total_items: 0,
+
+        note: '',
       }
     };
   },
@@ -749,7 +782,12 @@ export default {
   },
 
   computed: {
-    ...mapGetters({user: 'stateUser' })
+    ...mapGetters({user: 'stateUser' }),
+
+    selected_cartridge_rows() {
+        return this.selected_cartridge.items.length
+      }
+
   },
 
 }
