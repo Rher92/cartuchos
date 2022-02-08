@@ -1,7 +1,22 @@
 <template>
   <section>
     <form @submit.prevent="onSubmit">
-      
+      <b-overlay :show="show_overlay" rounded="sm" @shown="onShown" @hidden="onHidden">
+
+      <template #overlay>
+        <div class="text-center">
+          <b-icon icon="stopwatch" font-scale="3" animation="cylon"></b-icon>
+          <h3 ref="cancel" class="text-center">Procesando Información, por favor espere...</h3>
+          <!-- <b-button
+            ref="cancel"
+            variant="outline-danger"
+            size="sm"
+            aria-describedby="cancel-label"
+            @click="show = false"
+          >Cancel</b-button> -->
+        </div>
+      </template>
+
       <!-- CLIENTE -->
       <div class="bg-light">
         <div class="row">
@@ -302,7 +317,6 @@
       <div class="overflow-auto">
         <b-pagination
           v-model="selected_cartridge.currentPage"
-          @input= "selected_cartridge.currentPage"
           :total-rows="selected_cartridge_rows"
           :per-page="selected_cartridge.perPage"
           first-text="First"
@@ -333,8 +347,9 @@
      <b-button type="submit" block variant="primary">Guardar Albaran</b-button>
     </div>
 
-    </form>
+    </b-overlay>
 
+    </form>
   </section>
 </template>
 
@@ -355,6 +370,7 @@ export default {
       endpoint: process.env.VUE_APP_BASE_URL,
       options: [],
 
+      show_overlay: false,
       selectMode: 'multi',
 
       selected_cartridge: {
@@ -584,25 +600,17 @@ export default {
         } 
     },
 
-    validate : function(){
+    validate: function(){
       this.form.fieldsBlured = true;
-
-      // let cifrcv = this.validInputTexts(this.form.cifrc)
-      // let namev = this.validInputTexts(this.form.name)
-      // salesmanv = this.validInputTexts(this.form.salesman)
-
-      // weightv = this.validInputNumber(this.form.weight)
-      // laser_residualv = this.validInputNumber(this.form.laser_residual)
-      // inkject_residualv = this.validInputNumber(this.form.inkject_residual)
-      // laser_weightv = this.validInputNumber(this.form.laser_weight)
-      // inkjet_weightv = this.validInputNumber(this.form.inkjet_weight)
-      // total_weightv = this.validInputNumber(this.form.total_weight)
-      // total_itemsv = this.validInputNumber(this.form.total_items)
-      //  if(namev && cifrcv){
-      //     this.valid = true;
-      //  }
-      // let client = this.validInputNumber(this.form.client_id)
-      // let selected_cartridges = this.validateLenghtArray(this.selected_cartridges.items)
+      let _return = false
+      if (
+          this.validInputTexts(this.form.cifrc) &&
+          this.validInputTexts(this.form.name) &&
+          this.validateLenghtArray(this.selected_cartridge.items) &&
+          !this.show_overlay){
+            _return = true
+      }
+      return _return
     },
 
     validateLenghtArray: function(array){
@@ -797,33 +805,67 @@ export default {
 
     onSubmit(event) {
       event.preventDefault()
-      this.form.fieldsBlured = true
 
-      let cartridges = []
-      this.selected_cartridge.items.forEach(element => {
-        let item = {
-          'id': element.id,
-          'quantity': element.cantidad,
-          'weight': element.peso
+      let send_request = this.validate()
+
+      if (send_request){
+        this.show_overlay = true
+        let cartridges = []
+        this.selected_cartridge.items.forEach(element => {
+          let item = {
+            'id': element.id,
+            'quantity': element.cantidad,
+            'weight': element.peso
+          }
+          cartridges.push(item)
+        })
+
+        let body = {
+          'client_id': this.form.client_id,
+          'salesman': this.user.user.pk,
+          'box_weight': parseInt(this.form.weight),
+          'laser_residual': this.form.laser_residual,
+          'inkject_residual': this.form.inkject_residual,
+          'laser_weight': this.form.laser_weight,
+          'inkjet_weight': this.form.inkjet_weight,
+          'total_weight': this.form.total_weight,
+          'total_items': this.form.total_items,
+          'note': this.form.note,
+          'cartridges': cartridges
         }
-        cartridges.push(item)
-      })
-
-      let body = {
-        'client_id': this.form.client_id,
-        'salesman': this.user.user.pk,
-        'box_weight': parseInt(this.form.weight),
-        'laser_residual': this.form.laser_residual,
-        'inkject_residual': this.form.inkject_residual,
-        'laser_weight': this.form.laser_weight,
-        'inkjet_weight': this.form.inkjet_weight,
-        'total_weight': this.form.total_weight,
-        'total_items': this.form.total_items,
-        'note': this.form.note,
-        'cartridges': cartridges
+        console.log(body)
+        // send request here!!!.
       }
-      console.log(body)
     },
+
+    sendAlbaran(body){
+      let ep = `${this.endpoint}/api/delivery-note`
+      let json
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      };
+      fetch(ep, requestOptions)
+        .then(json)
+        .then(function (data) {
+          console.log('Request succeeded with JSON response', data);
+        })
+        .catch(function (error) {
+          console.log('Request failed', error);
+        });
+    },
+
+    onShown() {
+        // Focus the cancel button when the overlay is showing
+      this.$refs.cancel.focus()
+    },
+
+    onHidden() {
+        // Focus the show button when the overlay is removed
+      this.$refs.show.focus()
+    }
 
   },
 
