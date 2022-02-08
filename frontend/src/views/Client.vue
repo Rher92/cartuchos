@@ -18,7 +18,7 @@
                 @search="onSearchCifrc"
                 v-model="form.cifrc"
                 v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.cifrc)  && form.fieldsBlured}"
-                v-on:blur="fieldsBlured = true">
+                v-on:blur="form.fieldsBlured = true">
                 <template slot="no-options">
                   Escribe para buscar clientes..
                 </template>
@@ -41,13 +41,13 @@
               <v-select
                 label="nombre_razon_social"
                 :debounce="250"
-                @input="setSelectedShort"
-                @search="onSearchNombre"
                 :filterable="false"
                 :options="options"
+                @input="setSelectedShort"
+                @search="onSearchNombre"
                 v-model="form.name"
-                v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.nombre_razon_social)  && form.fieldsBlured}"
-                v-on:blur="fieldsBlured = true">
+                v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.name)  && form.fieldsBlured}"
+                v-on:blur="form.fieldsBlured = true">
                 <template slot="no-options">
                   Escribe para buscar clientes..
                 </template>
@@ -118,9 +118,9 @@
             <input
               type="number" min="0"
               v-model="form.weight" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.weight)  && form.fieldsBlured}"
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputNumberGreaterThanZero(form.weight)  && form.fieldsBlured}"
               v-on:blur="fieldsBlured = true">
-            <div class="invalid-feedback">Peso es requerido</div>
+            <div class="invalid-feedback">Peso es requerido y ser mayor 0</div>
           </div>
         </div>
         <div class="row">
@@ -129,7 +129,7 @@
             <input
               type="number" min="0" max="100"
               v-model="form.laser_residual" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.laser_residual)  && form.fieldsBlured}"
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputNumber(form.laser_residual)  && form.fieldsBlured}"
               v-on:blur="fieldsBlured = true"
               v-on:input="calculateWeightRemainingFromLaser">
             <div class="invalid-feedback">Laser Residual es requerido</div>
@@ -139,7 +139,7 @@
             <input 
               type="number" min="0" max="100"
               v-model="form.inkject_residual" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputTexts(form.inkject_residual)  && form.fieldsBlured}"
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputNumber(form.inkject_residual)  && form.fieldsBlured}"
               v-on:blur="fieldsBlured = true"
               v-on:input="calculateWeightRemainingFromInkjet">
             <div class="invalid-feedback">Inkject Residual es requerido</div>          
@@ -244,9 +244,9 @@
       <!-- Use text in props -->
         <b-pagination
           v-model="cartridge.currentPage"
-          @input= "updatePage(cartridge.currentPage)"
           :total-rows="cartridge.rows"
           :per-page="cartridge.perPage"
+          @input= "updatePage(cartridge.currentPage)"
           first-text="First"
           prev-text="Prev"
           next-text="Next"
@@ -258,15 +258,22 @@
     <!-- CARTUCHOS SELECCIONADOS -->
   <div class="bg-light" style="margin-top: 15px">
       <h3 class="text-center">Cartuchos Seleccionados</h3>
+
+      <div v-if="!validateLenghtArray(selected_cartridge.items)  && form.fieldsBlured">
+        <span class="text-danger">Debe seleccionar al menos 1 cartucho</span>
+      </div>
+
       <b-table
         :items="selected_cartridge.items"
         :fields="selected_cartridge.fields"
         :select-mode="selectMode"
         :per-page="selected_cartridge.perPage"
         :current-page="selected_cartridge.currentPage"
+        v-bind:class="{'form-control':true, 'is-invalid' : !validateLenghtArray(selected_cartridge.items)  && form.fieldsBlured}"
         responsive="sm"
         ref="selectableTable"
         selectable
+        class="form-control"
       >
 
         <template v-slot:cell(peso)="row">
@@ -289,10 +296,10 @@
         <template #cell(borrar)="row">
           <b-button class="delete-button" variant="danger" @click="removeRowHandler(row.index)">X</b-button>
         </template>
+
       </b-table>
 
-        <div class="overflow-auto">
-      <!-- Use text in props -->
+      <div class="overflow-auto">
         <b-pagination
           v-model="selected_cartridge.currentPage"
           @input= "selected_cartridge.currentPage"
@@ -327,7 +334,6 @@
     </div>
 
     </form>
-
 
   </section>
 </template>
@@ -569,22 +575,14 @@ export default {
           this.getClientFull(value.id, this.form)
         } else {
           for (let items in this.form){
-            this.form[items] = ''
+            if(['client_id', 'cifrc', 'name',
+                'number', 'address', 'telephone',
+                'email', 'contact', 'rate', 'country'].includes(items)){
+              this.form[items] = ''
+            }
           }
         } 
     },
-
-    // setSelected(value){
-    //     let data = this.getClientFull(value)
-    //     console.log(data)
-    //     this.form.address = data.direccion
-    //     this.form.telephone = data.telefono
-    //     this.form.email = data.email
-    //     this.form.contact = data.persona_contacto
-    //     this.form.rate = data.clasificacion.nombre
-    //     this.form.number = data.id
-    //   },
-
 
     validate : function(){
       this.form.fieldsBlured = true;
@@ -603,6 +601,16 @@ export default {
       //  if(namev && cifrcv){
       //     this.valid = true;
       //  }
+      // let client = this.validInputNumber(this.form.client_id)
+      // let selected_cartridges = this.validateLenghtArray(this.selected_cartridges.items)
+    },
+
+    validateLenghtArray: function(array){
+        let _return = false;
+        if (array.length > 0){
+          _return = true
+        }
+        return _return;
     },
 
     validInputTexts : function(field) {
@@ -615,10 +623,20 @@ export default {
         }
     },
     
-    validInputNumber : function(field) {
+    validInputNumberGreaterThanZero : function(field) {
       if (field !== '' && field !== null && field !== undefined){ 
         let _return = false;
         if (field > 0){
+          _return = true
+        }
+        return _return;
+      }
+    },
+
+    validInputNumber : function(field) {
+      if (field !== '' && field !== null && field !== undefined){
+        let _return = false;
+        if (field >= 0){
           _return = true
         }
         return _return;
@@ -778,9 +796,8 @@ export default {
     },
 
     onSubmit(event) {
-      // console.log(JSON.stringify(this.form))
       event.preventDefault()
-      // alert(JSON.stringify(this.form))
+      this.form.fieldsBlured = true
 
       let cartridges = []
       this.selected_cartridge.items.forEach(element => {
