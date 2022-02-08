@@ -6,14 +6,14 @@
       <template #overlay>
         <div class="text-center">
           <b-icon icon="stopwatch" font-scale="3" animation="cylon"></b-icon>
-          <h3 ref="cancel" class="text-center">Procesando Información, por favor espere...</h3>
-          <!-- <b-button
+          <h3 class="text-center">Procesando Información, por favor espere...</h3>
+          <b-button
             ref="cancel"
             variant="outline-danger"
             size="sm"
             aria-describedby="cancel-label"
             @click="show = false"
-          >Cancel</b-button> -->
+          >Cancel</b-button>
         </div>
       </template>
 
@@ -134,7 +134,8 @@
               type="number" min="0"
               v-model="form.weight" 
               v-bind:class="{'form-control':true, 'is-invalid' : !validInputNumberGreaterThanZero(form.weight)  && form.fieldsBlured}"
-              v-on:blur="fieldsBlured = true">
+              v-on:blur="fieldsBlured = true"
+              v-on:input="calculateWeightTotals">
             <div class="invalid-feedback">Peso es requerido y ser mayor 0</div>
           </div>
         </div>
@@ -662,7 +663,7 @@ export default {
               'marca': element.marca,
               'peso': element.peso,
               'cantidad': cantidad,
-              'peso_total': element.peso * cantidad,
+              'peso_total': (element.peso/1000) * cantidad,
               'familia': element.familia,
               'id': element.id
             })
@@ -729,9 +730,9 @@ export default {
 
     calculateWeightRemaining: function(){
       if (parseInt(this.form.total_weight) < parseInt(this.form.weight)){
-        let remaining_weight = parseInt(this.form.weight) - parseInt(this.form.total_weight)
-        let inkject_percent = parseInt(this.form.inkject_residual) / 100
-        let laser_percent = parseInt(this.form.laser_residual) / 100
+        let remaining_weight = parseFloat(this.form.weight) - parseFloat(this.form.total_weight)
+        let inkject_percent = parseFloat(this.form.inkject_residual) / 100
+        let laser_percent = parseFloat(this.form.laser_residual) / 100
         this.form.laser_weight = laser_percent * remaining_weight
         this.form.inkjet_weight = inkject_percent * remaining_weight
       } else {
@@ -744,7 +745,7 @@ export default {
 
     setWeightCartridge: function (index) {
       let cartridge = this.selected_cartridge.items[index]
-      cartridge.peso_total = cartridge.peso * cartridge.cantidad
+      cartridge.peso_total = (cartridge.peso/1000) * cartridge.cantidad
       this.calculateWeightTotals()
     },
 
