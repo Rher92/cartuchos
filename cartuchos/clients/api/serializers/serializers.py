@@ -142,6 +142,7 @@ class ClientLargeSerializer(serializers.ModelSerializer):
 
 class ClientShortSerializer(serializers.ModelSerializer):
     nombre_razon_social = serializers.SerializerMethodField()
+    cifrc = serializers.SerializerMethodField()
     
     class Meta:
         model = Cliente
@@ -154,7 +155,13 @@ class ClientShortSerializer(serializers.ModelSerializer):
     def get_nombre_razon_social(self, obj):
         _return = None
         if hasattr(obj, 'nombre_razon_social'):
-            _return = obj.nombre_razon_social.nombre
+            _return = obj.nombre_razon_social.nombre.upper()
+        return _return
+        
+    def get_cifrc(self, obj):
+        _return = None
+        if hasattr(obj, 'cifrc'):
+            _return = obj.cifrc.upper()
         return _return
 
 

@@ -84,16 +84,15 @@
 
         <!-- INFORMACION -->
         <div class="row">
-          <!-- <h3 class="text-center" style="margin: 5px">Información</h3> -->
-          <div class="col-md col-sm form-group">
-              <label for="number" class="form-label">País:</label>
-              <span class="input-group-text" id="basic-addon3 " v-if="!this.form.country">-</span>
-              <span class="input-group-text" id="basic-addon3 " v-else>{{form.country}}</span>
-          </div>
           <div class="col-md col-sm form-group">
               <label for="address" class="form-label">Dirección:</label>
               <span class="input-group-text" id="basic-addon3" v-if="!this.form.address">-</span>
               <span class="input-group-text" id="basic-addon3" v-else>{{form.address}}</span>
+          </div>
+          <div class="col-md col-sm form-group">
+              <label for="number" class="form-label">País:</label>
+              <span class="input-group-text" id="basic-addon3 " v-if="!this.form.country">-</span>
+              <span class="input-group-text" id="basic-addon3 " v-else>{{form.country}}</span>
           </div>
         </div>
         <div class="row">
@@ -123,7 +122,7 @@
         <!-- DESCARTABLES -->
         <div class="bg-light">
         <div class="row" style="margin-top: 15px">
-          <h3 class="text-center" style="margin: 5px">Descartables</h3>
+          <h3 class="text-center" style="margin: 5px">Información del albarán</h3>
           <div class="col-md col-sm form-group">
               <label for="salesman" class="form-label">Vendedor:</label>
               <span class="input-group-text" id="basic-addon3">{{user.user.username}}</span>
@@ -186,6 +185,22 @@
         </div>
       </div>
 
+      <!-- NOTA DEL ALMACEN -->
+    <div class="bg-light" style="margin-top: 15px">
+      <h3 class="text-center">Nota del almacén</h3>
+      <template>
+        <div>
+          <b-form-textarea
+            id="textarea"
+            v-model="form.note"
+            placeholder="Escriba nota adicional..."
+            rows="3"
+            max-rows="6"
+          ></b-form-textarea>
+        </div>
+      </template>
+    </div>
+
    <!-- CARTUCHOS -->
 <div class="bg-light">
   <h3 class="text-center" style="margin: 15px">Cartuchos</h3>
@@ -241,6 +256,7 @@
       ref="selectableTable"
       selectable
       @row-selected="onRowSelected"
+      striped hover
     >
       <!-- Example scoped slot for select state illustrative purposes -->
       <template #cell(selected)="{ rowSelected }">
@@ -288,8 +304,9 @@
         v-bind:class="{'form-control':true, 'is-invalid' : !validateLenghtArray(selected_cartridge.items)  && form.fieldsBlured}"
         responsive="sm"
         ref="selectableTable"
-        selectable
         class="form-control"
+        selectable
+        striped hover
       >
 
         <template v-slot:cell(peso)="row">
@@ -329,21 +346,6 @@
 
   </div>
 
-    <div class="bg-light" style="margin-top: 15px">
-      <h3 class="text-center">Nota adicional</h3>
-      <template>
-        <div>
-          <b-form-textarea
-            id="textarea"
-            v-model="form.note"
-            placeholder="Escriba nota adicional..."
-            rows="3"
-            max-rows="6"
-          ></b-form-textarea>
-        </div>
-      </template>
-    </div>
-
     <div style="float:right; margin-top: 15px" class="">
      <b-button type="submit" block variant="primary">Guardar Albaran</b-button>
     </div>
@@ -377,7 +379,8 @@ export default {
       selected_cartridge: {
         perPage: 10,
         currentPage: 1,
-        'fields': ['modelo', 'peso', 'marca', 'cantidad', 'peso_total', 'borrar', 'familia'],
+        // 'fields': ['modelo', 'peso', 'marca', 'cantidad', 'peso_total', 'borrar', 'familia'],
+        'fields': ['modelo', 'peso', 'marca', 'familia', 'cantidad', 'peso_total', 'borrar'],
         'items': [],
         'weitgh_editable': false,
         'weitgh': 0
@@ -387,7 +390,7 @@ export default {
         next_cartridge: '',
         previous_cartridge: '',
         total: '',
-        fields: ['selected', 'familia', 'subfamilia', 'modelo', 'referencia', 'peso', 'marca', 'codigo'],
+        fields: ['selected', 'codigo', 'marca', 'familia', 'subfamilia', 'modelo', 'referencia', 'peso'], 
         items: [],
         items_selected: [],
         items_selected_ids: [],
@@ -481,13 +484,13 @@ export default {
           .then(res => {
             res.json().then( json =>(
               form.client_id = json.id,
-              form.address = json.direccion,
-              form.telephone = json.telefono,
-              form.email = json.email,
-              form.contact = json.persona_contacto,
-              form.rate = json.clasificacion,
-              form.number = json.id,
-              form.country = json.pais)
+              form.address = json.direccion.toUpperCase(),
+              form.telephone = json.telefono.toUpperCase(),
+              form.email = json.email.toUpperCase(),
+              form.contact = json.persona_contacto.toUpperCase(),
+              form.rate = json.clasificacion.toUpperCase(),
+              form.number = json.id.toUpperCase(),
+              form.country = json.pais.toUpperCase())
             )
           })
           .catch(function (error) {

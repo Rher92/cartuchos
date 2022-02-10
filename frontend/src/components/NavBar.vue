@@ -1,6 +1,7 @@
 <template>
   <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <!-- <img src="../assets/logo-32x32.png"> -->
       <div class="container">
         <a class="navbar-brand" href="/">Inicio</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,12 +9,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul v-if="isLoggedIn" class="navbar-nav me-auto mb-2 mb-md-0">
-            <!-- <li class="nav-item">
-              <router-link class="nav-link" to="/">Home</router-link>
-            </li> -->
-            <!-- <li class="nav-item">
-              <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
-            </li> -->
             <li class="nav-item">
               <router-link class="nav-link" to="/profile">Mi Perfil</router-link>
             </li>
