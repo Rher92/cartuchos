@@ -39,7 +39,6 @@ services:
       context: .
       dockerfile: ./compose/staging/vuejs/Dockerfile
     volumes:
-      - ./frontend:/app
       - /app/node_modules
     ports:
       - 8080:8080
