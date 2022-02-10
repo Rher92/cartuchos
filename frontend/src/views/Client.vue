@@ -6,14 +6,16 @@
       <template #overlay>
         <div class="text-center">
           <b-icon icon="stopwatch" font-scale="3" animation="cylon"></b-icon>
-          <h3 class="text-center">Procesando Información, por favor espere...</h3>
+          <h3 d="cancel-label" class="text-center">Procesando Información, por favor espere...</h3>
           <b-button
             ref="cancel"
             variant="outline-danger"
             size="sm"
             aria-describedby="cancel-label"
-            @click="show = false"
-          >Cancel</b-button>
+            @click="show_overlay = false"
+          >
+            Cancel
+          </b-button>
         </div>
       </template>
 
@@ -23,7 +25,7 @@
           <h3 class="text-center" style="margin: 5px">Cliente</h3>
           <div class="col-md col-sm form-group">
             <label for="cifrc" class="form-label">CIFRC:</label>
-            <div id="cifrc">
+            <div ref="show" id="cifrc">
               <v-select
                 label="cifrc"
                 :debounce="250"
@@ -726,7 +728,7 @@ export default {
             this.form.laser_residual = 0
             this.form.inkject_residual = 100
         } else {
-          this.form.inkject_residual = 100 - this.form.laser_residual
+          this.form.inkject_residual = 100 - parseFloat(this.form.laser_residual)
         }
         this.calculateWeightRemaining()
     },
@@ -818,8 +820,8 @@ export default {
         this.selected_cartridge.items.forEach(element => {
           let item = {
             'id': element.id,
-            'quantity': element.cantidad,
-            'weight': element.peso
+            'quantity': parseInt(element.cantidad),
+            'weight': parseFloat(element.peso)
           }
           cartridges.push(item)
         })
@@ -828,12 +830,12 @@ export default {
           'client_id': this.form.client_id,
           'salesman': this.user.user.pk,
           'box_weight': parseInt(this.form.weight),
-          'laser_residual': this.form.laser_residual,
-          'inkject_residual': this.form.inkject_residual,
-          'laser_weight': this.form.laser_weight,
-          'inkjet_weight': this.form.inkjet_weight,
-          'total_weight': this.form.total_weight,
-          'total_items': this.form.total_items,
+          'laser_residual_percent': parseFloat(this.form.laser_residual),
+          'inkject_residual_percent': parseFloat(this.form.inkject_residual),
+          'laser_residual_weight': parseFloat(this.form.laser_weight),
+          'inkject_residual_weight': parseFloat(this.form.inkjet_weight),
+          'total_weight': parseFloat( this.form.total_weight),
+          'total_items': parseInt(this.form.total_items),
           'note': this.form.note,
           'cartridges': cartridges
         }
