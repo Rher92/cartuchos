@@ -17,6 +17,10 @@ class NoteCodeReference(BaseCreatedUpdatedModel):
         max_length=10,
         default='A'
     )
+
+    class Meta:
+        verbose_name = ("Codigo de Albaran")
+        verbose_name_plural = ("Codigo de Albaranes")
     
     def __str__(self):
         return f"{self.prefix}-{self.number}"
@@ -55,7 +59,7 @@ class Notes(BaseCreatedUpdatedModel):
         related_query_name='client',
         on_delete=models.DO_NOTHING,
     )
-    
+
     class Meta:
         verbose_name = ("Albaran")
         verbose_name_plural = ("Albaranes")
@@ -85,3 +89,10 @@ class SelectedCartridges(BaseCreatedUpdatedModel):
         on_delete=models.DO_NOTHING,
         null=True
     )
+
+    class Meta:
+        verbose_name = ("Cartucho Seleccionado")
+        verbose_name_plural = ("Cartuchos Seleccionados")
+
+    def __str__(self) -> str:
+        return f"{self.selected.code}"
