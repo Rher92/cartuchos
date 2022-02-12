@@ -354,6 +354,18 @@
 
     </b-overlay>
 
+    <div>
+      <b-modal id="modal-error" title="ERROR" ok-only>
+        <p class="my-4">algún error ha ocurrido. intente de nuevo.</p>
+      </b-modal>
+    </div>
+
+    <div>
+      <b-modal id="modal-success" title="EXITO" ok-only>
+        <p class="my-4">Se ha guaradado correctamente el Albarán.</p>
+      </b-modal>
+    </div>
+
     </form>
   </section>
 </template>
@@ -819,7 +831,7 @@ export default {
         let cartridges = []
         this.selected_cartridge.items.forEach(element => {
           let item = {
-            'id': element.id,
+            'cartridge': element.id,
             'quantity': parseInt(element.cantidad),
             'weight': parseFloat(element.peso)
           }
@@ -827,26 +839,24 @@ export default {
         })
 
         let body = {
-          'client_id': this.form.client_id,
+          'client': this.form.client_id,
           'salesman': this.user.user.pk,
           'box_weight': parseInt(this.form.weight),
-          'laser_residual_percent': parseFloat(this.form.laser_residual),
-          'inkject_residual_percent': parseFloat(this.form.inkject_residual),
-          'laser_residual_weight': parseFloat(this.form.laser_weight),
-          'inkject_residual_weight': parseFloat(this.form.inkjet_weight),
+          'laser_percent': parseFloat(this.form.laser_residual),
+          'laser_weight': parseFloat(this.form.laser_weight),
+          'inkjet_percent': parseFloat(this.form.inkject_residual),
+          'inkjet_weight': parseFloat(this.form.inkjet_weight),
           'total_weight': parseFloat( this.form.total_weight),
           'total_items': parseInt(this.form.total_items),
           'note': this.form.note,
           'cartridges': cartridges
         }
-        console.log(body)
-        // send request here!!!.
+        this.sendAlbaran(body)
       }
     },
 
     sendAlbaran(body){
-      let ep = `${this.endpoint}/api/delivery-note`
-      let json
+      let ep = `${this.endpoint}/api/notes/`
 
       const requestOptions = {
         method: "POST",
@@ -854,7 +864,15 @@ export default {
         body: JSON.stringify(body)
       };
       fetch(ep, requestOptions)
-        .then(json)
+        .then(res => {
+            this.show_overlay = false
+            if (res.status == 201){
+              this.$bvModal.show('modal-success')
+              this.$router.go(this.$router.currentRoute)  // refresh page.
+            } else {
+              this.$bvModal.show('modal-error')
+            }
+          })
         .then(function (data) {
           console.log('Request succeeded with JSON response', data);
         })
