@@ -1,9 +1,11 @@
 from django.db import models
 
+from utils.models import BaseCreatedUpdatedModel
+
 # Create your models here.
 
 
-class Manufacturer(models.Model):
+class Manufacturer(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -13,7 +15,7 @@ class Manufacturer(models.Model):
     def __str__(self):
         return self.name
 
-class Family(models.Model):
+class Family(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -23,18 +25,7 @@ class Family(models.Model):
     def __str__(self):
         return self.name
 
-class SubFamilyIntern(models.Model):
-    name = models.CharField(
-        null=True,
-        blank=True, 
-        max_length=255
-    )
-
-    def __str__(self):
-        return self.name
-    
-
-class SubFamily(models.Model):
+class SubFamilyIntern(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -45,7 +36,18 @@ class SubFamily(models.Model):
         return self.name
     
 
-class Reference(models.Model):
+class SubFamily(BaseCreatedUpdatedModel):
+    name = models.CharField(
+        null=True,
+        blank=True, 
+        max_length=255
+    )
+
+    def __str__(self):
+        return self.name
+    
+
+class Reference(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -56,7 +58,7 @@ class Reference(models.Model):
         return self.name
     
     
-class ColorReference(models.Model):
+class ColorReference(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -66,7 +68,7 @@ class ColorReference(models.Model):
     def __str__(self):
         return self.name
     
-class Color(models.Model):
+class Color(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -76,7 +78,7 @@ class Color(models.Model):
     def __str__(self):
         return self.name
 
-class Size(models.Model):
+class Size(BaseCreatedUpdatedModel):
     value = models.CharField(
         null=True,
         blank=True, 
@@ -87,7 +89,7 @@ class Size(models.Model):
         return self.value
 
 
-class Clase(models.Model):
+class Clase(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -98,7 +100,7 @@ class Clase(models.Model):
         return self.name
     
     
-class GroupUnity(models.Model):
+class GroupUnity(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -109,7 +111,7 @@ class GroupUnity(models.Model):
         return self.name
 
 
-class ReferenceGroup(models.Model):
+class ReferenceGroup(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -120,7 +122,7 @@ class ReferenceGroup(models.Model):
         return self.name
 
 
-class FboCode(models.Model):
+class FboCode(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 
@@ -131,7 +133,7 @@ class FboCode(models.Model):
         return self.name
 
 
-class Cartridges(models.Model):
+class Cartridges(BaseCreatedUpdatedModel):
     code = models.CharField(
         null=True,
         blank=True, 

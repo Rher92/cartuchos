@@ -1,11 +1,14 @@
 from django.db import models
 
+from utils.models import BaseCreatedUpdatedModel
+
+
 # Create your models here.
 
 from cartridge.models import SubFamilyIntern, Family
 
 
-class Fees(models.Model):
+class Fees(BaseCreatedUpdatedModel):
     name = models.CharField(
         null=True,
         blank=True, 

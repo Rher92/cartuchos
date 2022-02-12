@@ -1,8 +1,10 @@
 from django.db import models
 
+from utils.models import BaseCreatedUpdatedModel
+
 # Create your models here.
 
-class PrincipalCIF(models.Model):
+class PrincipalCIF(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -17,7 +19,7 @@ class PrincipalCIF(models.Model):
         return super().save(*args, **kwargs)
 
 
-class NombreRazonSocial(models.Model):
+class NombreRazonSocial(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -32,7 +34,7 @@ class NombreRazonSocial(models.Model):
         return super().save(*args, **kwargs)
 
 
-class TarifaAsignada(models.Model):
+class TarifaAsignada(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -47,22 +49,7 @@ class TarifaAsignada(models.Model):
         return super().save(*args, **kwargs)
 
 
-class Tipo(models.Model):
-    nombre = models.CharField(
-        null=True,
-        blank=True, 
-        max_length=255
-    )
-
-    def __str__(self):
-        return self.nombre
-    
-    def save(self, *args, **kwargs):
-        self.nombre = self.nombre.lower()
-        return super().save(*args, **kwargs)
-
-
-class Perfil(models.Model):
+class Tipo(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -77,7 +64,7 @@ class Perfil(models.Model):
         return super().save(*args, **kwargs)
 
 
-class CpZip(models.Model):
+class Perfil(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -92,7 +79,7 @@ class CpZip(models.Model):
         return super().save(*args, **kwargs)
 
 
-class Poblacion(models.Model):
+class CpZip(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -107,51 +94,7 @@ class Poblacion(models.Model):
         return super().save(*args, **kwargs)
 
 
-class ZonaGeografica(models.Model):
-    nombre = models.CharField(
-        null=True,
-        blank=True, 
-        max_length=255
-    )
-
-    def __str__(self):
-        return self.nombre
-
-    def save(self, *args, **kwargs):
-        self.nombre = self.nombre.lower()
-        return super().save(*args, **kwargs)
-
-
-class Provincia(models.Model):
-    nombre = models.CharField(
-        null=True,
-        blank=True, 
-        max_length=255
-    )
-
-    def __str__(self):
-        return self.nombre
-
-    def save(self, *args, **kwargs):
-        self.nombre = self.nombre.lower()
-        return super().save(*args, **kwargs)
-
-class Pais(models.Model):
-    nombre = models.CharField(
-        null=True,
-        blank=True, 
-        max_length=255
-    )
-
-    def __str__(self):
-        return self.nombre
-
-    def save(self, *args, **kwargs):
-        self.nombre = self.nombre.lower()
-        return super().save(*args, **kwargs)
-
-
-class Clasificacion(models.Model):
+class Poblacion(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -166,7 +109,51 @@ class Clasificacion(models.Model):
         return super().save(*args, **kwargs)
 
 
-class Campaña(models.Model):
+class ZonaGeografica(BaseCreatedUpdatedModel):
+    nombre = models.CharField(
+        null=True,
+        blank=True, 
+        max_length=255
+    )
+
+    def __str__(self):
+        return self.nombre
+
+    def save(self, *args, **kwargs):
+        self.nombre = self.nombre.lower()
+        return super().save(*args, **kwargs)
+
+
+class Provincia(BaseCreatedUpdatedModel):
+    nombre = models.CharField(
+        null=True,
+        blank=True, 
+        max_length=255
+    )
+
+    def __str__(self):
+        return self.nombre
+
+    def save(self, *args, **kwargs):
+        self.nombre = self.nombre.lower()
+        return super().save(*args, **kwargs)
+
+class Pais(BaseCreatedUpdatedModel):
+    nombre = models.CharField(
+        null=True,
+        blank=True, 
+        max_length=255
+    )
+
+    def __str__(self):
+        return self.nombre
+
+    def save(self, *args, **kwargs):
+        self.nombre = self.nombre.lower()
+        return super().save(*args, **kwargs)
+
+
+class Clasificacion(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -181,7 +168,7 @@ class Campaña(models.Model):
         return super().save(*args, **kwargs)
 
 
-class Frecuencia(models.Model):
+class Campaña(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -196,7 +183,7 @@ class Frecuencia(models.Model):
         return super().save(*args, **kwargs)
 
 
-class Nima(models.Model):
+class Frecuencia(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -211,7 +198,22 @@ class Nima(models.Model):
         return super().save(*args, **kwargs)
 
 
-class ContratoFirmado(models.Model):
+class Nima(BaseCreatedUpdatedModel):
+    nombre = models.CharField(
+        null=True,
+        blank=True, 
+        max_length=255
+    )
+
+    def __str__(self):
+        return self.nombre
+    
+    def save(self, *args, **kwargs):
+        self.nombre = self.nombre.lower()
+        return super().save(*args, **kwargs)
+
+
+class ContratoFirmado(BaseCreatedUpdatedModel):
     nombre = models.CharField(
         null=True,
         blank=True, 
@@ -226,7 +228,7 @@ class ContratoFirmado(models.Model):
         return super().save(*args, **kwargs)
     
 
-class Cliente(models.Model):
+class Cliente(BaseCreatedUpdatedModel):
     cifrc = models.CharField(
         null=True,
         blank=True, 
