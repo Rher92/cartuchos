@@ -161,33 +161,33 @@
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="total_items" class="form-label">Artículos en total:</label>
-              <span class="input-group-text" id="basic-addon3">{{form.total_items}}</span>
+            <label for="totalItems" class="form-label">Artículos en total:</label>
+              <span class="input-group-text" id="basic-addon3">{{form.totalItems}}</span>
             <div class="invalid-feedback">Artículos en total es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="total_weight" class="form-label">Peso Total Albaran(Kg):</label>
-              <span class="input-group-text" id="basic-addon3">{{form.total_weight}}</span>
+            <label for="totalWeight" class="form-label">Peso Total Albaran(Kg):</label>
+              <span class="input-group-text" id="basic-addon3">{{form.totalWeight}}</span>
             <div class="invalid-feedback">Peso Total es requerido</div>
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="laser_residual" class="form-label">Laser Residual(%):</label>
+            <label for="laserResidual" class="form-label">Laser Residual(%):</label>
             <input
               type="number" min="0" max="100"
-              v-model="form.laser_residual" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputNumber(form.laser_residual)  && form.fieldsBlured}"
+              v-model="form.laserResidual" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputNumber(form.laserResidual)  && form.fieldsBlured}"
               v-on:blur="fieldsBlured = true"
               v-on:input="calculateWeightRemainingFromLaser">
             <div class="invalid-feedback">Laser Residual es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="inkject_residual" class="form-label">Inkject Residual(%):</label>
+            <label for="inkjectResidual" class="form-label">Inkject Residual(%):</label>
             <input 
               type="number" min="0" max="100"
-              v-model="form.inkject_residual" 
-              v-bind:class="{'form-control':true, 'is-invalid' : !validInputNumber(form.inkject_residual)  && form.fieldsBlured}"
+              v-model="form.inkjectResidual" 
+              v-bind:class="{'form-control':true, 'is-invalid' : !validInputNumber(form.inkjectResidual)  && form.fieldsBlured}"
               v-on:blur="fieldsBlured = true"
               v-on:input="calculateWeightRemainingFromInkjet">
             <div class="invalid-feedback">Inkject Residual es requerido</div>          
@@ -195,24 +195,24 @@
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="laser_weight" class="form-label">Peso Laser(Kg) Sobrante:</label>
-              <span class="input-group-text" id="basic-addon3">{{form.laser_weight}}</span>
+            <label for="laserWeightResidual" class="form-label">Peso Laser(Kg) Sobrante:</label>
+              <span class="input-group-text" id="basic-addon3">{{form.laserWeightResidual}}</span>
             <div class="invalid-feedback">Peso Laser es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="inkjet_weight" class="form-label">Peso Inkject(Kg) Sobrante:</label>
-            <span class="input-group-text" id="basic-addon3">{{form.inkjet_weight}}</span>
+            <label for="inkjetWeightResidual" class="form-label">Peso Inkject(Kg) Sobrante:</label>
+            <span class="input-group-text" id="basic-addon3">{{form.inkjetWeightResidual}}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="laser_weight" class="form-label">Peso Laser(Kg) seleccionado en albaran:</label>
-              <span class="input-group-text" id="basic-addon3">{{form.laser_weight}}</span>
+            <label for="laserWeightResidual" class="form-label">Peso Laser(Kg) seleccionado en albaran:</label>
+              <span class="input-group-text" id="basic-addon3">{{form.laserWeighted}}</span>
             <div class="invalid-feedback">Peso Laser es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="inkjet_weight" class="form-label">Peso Inkject(Kg) seleccionado en albaran:</label>
-            <span class="input-group-text" id="basic-addon3">{{form.inkjet_weight}}</span>
+            <label for="inkjetWeightResidual" class="form-label">Peso Inkject(Kg) seleccionado en albaran:</label>
+            <span class="input-group-text" id="basic-addon3">{{form.inkjetWeighted}}</span>
           </div>
         </div>
       </div>
@@ -489,12 +489,14 @@ export default {
         // DESCARTABLES
         salesman: '',
         weight: 0,
-        laser_residual: 0,
-        inkject_residual: 0,
-        laser_weight: 0,
-        inkjet_weight: 0,
-        total_weight: 0,
-        total_items: 0,
+        laserResidual: 0,
+        inkjectResidual: 0,
+        laserWeightResidual: 0,
+        inkjetWeightResidual: 0,
+        laserWeighted: 0,
+        inkjetWeighted: 0,
+        totalWeight: 0,
+        totalItems: 0,
 
         note: '',
       }
@@ -746,56 +748,65 @@ export default {
 
     calculateWeightTotals: function(){
       let cartridges = this.selected_cartridge.items
-      this.form.total_weight = 0
-      this.form.total_items = 0
-      this.form.inkjet_weight = 0
-      this.form.laser_weight = 0
+      this.form.totalWeight = 0
+      this.form.totalItems = 0
+      this.form.inkjetWeightResidual = 0
+      this.form.laserWeightResidual = 0
+      this.form.inkjetWeighted = 0
+      this.form.laserWeighted = 0
 
       cartridges.forEach(element =>{
-          this.form.total_weight += element.peso_total
-          this.form.total_items += parseInt(element.cantidad)
+          this.form.totalWeight += element.peso_total
+          this.form.totalItems += parseInt(element.cantidad)
+
+          if (element.familia == "INKJET"){
+            this.form.inkjetWeighted += element.peso_total
+          } else {
+            this.form.laserWeighted += element.peso_total
+          }
+
       })
       this.calculateWeightRemaining()
     },
 
     calculateWeightRemainingFromInkjet: function(){
-      if(parseInt(this.form.inkject_residual) >= 100){
-          this.form.laser_residual = 0
-          this.form.inkject_residual = 100
-        } else if(this.form.inkject_residual == ''){
-            this.form.inkject_residual = 0
-            this.form.laser_residual = 100
+      if(parseInt(this.form.inkjectResidual) >= 100){
+          this.form.laserResidual = 0
+          this.form.inkjectResidual = 100
+        } else if(this.form.inkjectResidual == ''){
+            this.form.inkjectResidual = 0
+            this.form.laserResidual = 100
         } else {
-          this.form.laser_residual = 100 - parseInt(this.form.inkject_residual)
+          this.form.laserResidual = 100 - parseInt(this.form.inkjectResidual)
         }
       this.calculateWeightRemaining()
     },
 
     calculateWeightRemainingFromLaser: function(){
-      if(this.form.laser_residual >= 100){
-          this.form.inkject_residual = 0
-          this.form.laser_residual = 100
-        } else if(this.form.laser_residual == ''){
-            this.form.laser_residual = 0
-            this.form.inkject_residual = 100
+      if(this.form.laserResidual >= 100){
+          this.form.inkjectResidual = 0
+          this.form.laserResidual = 100
+        } else if(this.form.laserResidual == ''){
+            this.form.laserResidual = 0
+            this.form.inkjectResidual = 100
         } else {
-          this.form.inkject_residual = 100 - parseFloat(this.form.laser_residual)
+          this.form.inkjectResidual = 100 - parseFloat(this.form.laserResidual)
         }
         this.calculateWeightRemaining()
     },
 
     calculateWeightRemaining: function(){
-      if (parseInt(this.form.total_weight) < parseInt(this.form.weight)){
-        let remaining_weight = parseFloat(this.form.weight) - parseFloat(this.form.total_weight)
-        let inkject_percent = parseFloat(this.form.inkject_residual) / 100
-        let laser_percent = parseFloat(this.form.laser_residual) / 100
-        this.form.laser_weight = laser_percent * remaining_weight
-        this.form.inkjet_weight = inkject_percent * remaining_weight
+      if (parseInt(this.form.totalWeight) < parseInt(this.form.weight)){
+        let remaining_weight = parseFloat(this.form.weight) - parseFloat(this.form.totalWeight)
+        let inkject_percent = parseFloat(this.form.inkjectResidual) / 100
+        let laser_percent = parseFloat(this.form.laserResidual) / 100
+        this.form.laserWeightResidual = laser_percent * remaining_weight
+        this.form.inkjetWeightResidual = inkject_percent * remaining_weight
       } else {
-        this.form.laser_residual = 0
-        this.form.inkject_residual = 0
-        this.form.laser_weight = 0
-        this.form.inkjet_weight = 0
+        this.form.laserResidual = 0
+        this.form.inkjectResidual = 0
+        this.form.laserWeightResidual = 0
+        this.form.inkjetWeightResidual = 0
       }
     },
 
@@ -881,12 +892,14 @@ export default {
           'client': this.form.client_id,
           'salesman': this.user.user.pk,
           'box_weight': parseInt(this.form.weight),
-          'laser_percent': parseFloat(this.form.laser_residual),
-          'laser_weight': parseFloat(this.form.laser_weight),
-          'inkjet_percent': parseFloat(this.form.inkject_residual),
-          'inkjet_weight': parseFloat(this.form.inkjet_weight),
-          'total_weight': parseFloat( this.form.total_weight),
-          'total_items': parseInt(this.form.total_items),
+          'laser_percent': parseFloat(this.form.laserResidual),
+          'laser_weight_residual': parseFloat(this.form.laserWeightResidual),
+          'laser_weight': parseFloat(this.form.laserWeighted),
+          'inkjet_percent': parseFloat(this.form.inkjectResidual),
+          'inkjet_weight_residual': parseFloat(this.form.inkjetWeightResidual),
+          'inkjet_weight': parseFloat(this.form.inkjetWeighted),
+          'total_weight': parseFloat( this.form.totalWeight),
+          'total_items': parseInt(this.form.totalItems),
           'note': this.form.note,
           'cartridges': cartridges
         }

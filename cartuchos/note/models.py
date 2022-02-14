@@ -39,6 +39,8 @@ class Notes(BaseCreatedUpdatedModel):
     laser_percent = models.FloatField()
     inkjet_weight = models.FloatField()
     inkjet_percent = models.FloatField()
+    inkjet_weight_residual = models.FloatField()
+    laser_weight_residual = models.FloatField()
     total_items = models.IntegerField()
     code = models.CharField(
         null=True,
