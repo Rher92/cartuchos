@@ -34,7 +34,6 @@ class ClientsViewSet(mixins.ListModelMixin,
 
     @action(detail=False, methods=['GET'])
     def short(self, *args, **kwargs):
-        # import pdb; pdb.set_trace()
         if param := self.request.query_params.get('cifrc'):
             queryset = Cliente.objects.filter(cifrc__icontains=param)
         elif param := self.request.query_params.get('nombre_razon_social__nombre'):

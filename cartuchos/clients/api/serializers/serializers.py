@@ -100,6 +100,10 @@ class ClientLargeSerializer(serializers.ModelSerializer):
     contrato_firmado = serializers.SerializerMethodField()
     clasificacion = serializers.SerializerMethodField()
     pais = serializers.SerializerMethodField()
+    tarifa_asignada = serializers.SerializerMethodField()
+    poblacion = serializers.SerializerMethodField()
+    zona_geografica = serializers.SerializerMethodField()
+    provincia = serializers.SerializerMethodField()
     
     class Meta:
         model = Cliente
@@ -113,7 +117,11 @@ class ClientLargeSerializer(serializers.ModelSerializer):
             "nombre_razon_social",
             "contrato_firmado",
             "clasificacion",
-            "pais"
+            "pais",
+            "tarifa_asignada",
+            "poblacion",
+            "zona_geografica",
+            "provincia",
         ]
         
     def get_clasificacion(self, obj):
@@ -121,23 +129,47 @@ class ClientLargeSerializer(serializers.ModelSerializer):
         if hasattr(obj, 'clasificacion'):
             _return = obj.clasificacion.nombre
         return _return
-        
+
     def get_contrato_firmado(self, obj):
         _return = None
         if hasattr(obj, 'contrato_firmado'):
             _return = obj.contrato_firmado.nombre
         return _return
-        
+
     def get_nombre_razon_social(self, obj):
         _return = None
         if hasattr(obj, 'nombre_razon_social'):
             _return = obj.nombre_razon_social.nombre
         return _return
-        
+
     def get_pais(self, obj):
         _return = None
         if hasattr(obj, 'pais'):
             _return = obj.pais.nombre
+        return _return
+
+    def get_tarifa_asignada(self, obj):
+        _return = None
+        if hasattr(obj, 'tarifa_asignada'):
+            _return = obj.tarifa_asignada.nombre
+        return _return
+
+    def get_poblacion(self, obj):
+        _return = None
+        if hasattr(obj, 'poblacion'):
+            _return = obj.poblacion.nombre
+        return _return
+
+    def get_zona_geografica(self, obj):
+        _return = None
+        if hasattr(obj, 'zona_geografica'):
+            _return = obj.zona_geografica.nombre
+        return _return
+
+    def get_provincia(self, obj):
+        _return = None
+        if hasattr(obj, 'provincia'):
+            _return = obj.provincia.nombre
         return _return
 
 class ClientShortSerializer(serializers.ModelSerializer):

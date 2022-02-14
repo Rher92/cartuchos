@@ -91,10 +91,29 @@
               <span class="input-group-text" id="basic-addon3" v-if="!this.form.address">-</span>
               <span class="input-group-text" id="basic-addon3" v-else>{{form.address}}</span>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-md col-sm form-group">
+              <label for="address" class="form-label">Población:</label>
+              <span class="input-group-text" id="basic-addon3" v-if="!this.form.community">-</span>
+              <span class="input-group-text" id="basic-addon3" v-else>{{form.community}}</span>
+          </div>
           <div class="col-md col-sm form-group">
               <label for="number" class="form-label">País:</label>
               <span class="input-group-text" id="basic-addon3 " v-if="!this.form.country">-</span>
               <span class="input-group-text" id="basic-addon3 " v-else>{{form.country}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md col-sm form-group">
+              <label for="address" class="form-label">Zona geografica:</label>
+              <span class="input-group-text" id="basic-addon3" v-if="!this.form.geoZone">-</span>
+              <span class="input-group-text" id="basic-addon3" v-else>{{form.geoZone}}</span>
+          </div>
+          <div class="col-md col-sm form-group">
+              <label for="number" class="form-label">Provincia:</label>
+              <span class="input-group-text" id="basic-addon3 " v-if="!this.form.province">-</span>
+              <span class="input-group-text" id="basic-addon3 " v-else>{{form.province}}</span>
           </div>
         </div>
         <div class="row">
@@ -114,9 +133,9 @@
               <span class="input-group-text" id="basic-addon3" v-else>{{form.email}}</span>
           </div>
           <div class="col-md col-sm form-group">
-              <label for="rate" class="form-label">Rate:</label>
-              <span class="input-group-text" id="basic-addon3" v-if="!this.form.rate">-</span>
-              <span class="input-group-text" id="basic-addon3" v-else>{{form.rate}}</span>
+              <label for="rate" class="form-label">Tarifa asignada:</label>
+              <span class="input-group-text" id="basic-addon3" v-if="!this.form.assignedRate">-</span>
+              <span class="input-group-text" id="basic-addon3" v-else>{{form.assignedRate}}</span>
           </div>
         </div>
       </div>
@@ -138,6 +157,18 @@
               v-on:blur="fieldsBlured = true"
               v-on:input="calculateWeightTotals">
             <div class="invalid-feedback">Peso es requerido y ser mayor 0</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md col-sm form-group">
+            <label for="total_items" class="form-label">Artículos en total:</label>
+              <span class="input-group-text" id="basic-addon3">{{form.total_items}}</span>
+            <div class="invalid-feedback">Artículos en total es requerido</div>
+          </div>
+          <div class="col-md col-sm form-group">
+            <label for="total_weight" class="form-label">Peso Total Albaran(Kg):</label>
+              <span class="input-group-text" id="basic-addon3">{{form.total_weight}}</span>
+            <div class="invalid-feedback">Peso Total es requerido</div>
           </div>
         </div>
         <div class="row">
@@ -164,25 +195,24 @@
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="laser_weight" class="form-label">Peso Laser(Kg):</label>
+            <label for="laser_weight" class="form-label">Peso Laser(Kg) Sobrante:</label>
               <span class="input-group-text" id="basic-addon3">{{form.laser_weight}}</span>
             <div class="invalid-feedback">Peso Laser es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="inkjet_weight" class="form-label">Peso Inkject(Kg):</label>
+            <label for="inkjet_weight" class="form-label">Peso Inkject(Kg) Sobrante:</label>
             <span class="input-group-text" id="basic-addon3">{{form.inkjet_weight}}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="total_items" class="form-label">Artículos en total:</label>
-              <span class="input-group-text" id="basic-addon3">{{form.total_items}}</span>
-            <div class="invalid-feedback">Artículos en total es requerido</div>
+            <label for="laser_weight" class="form-label">Peso Laser(Kg) seleccionado en albaran:</label>
+              <span class="input-group-text" id="basic-addon3">{{form.laser_weight}}</span>
+            <div class="invalid-feedback">Peso Laser es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="total_weight" class="form-label">Peso Total Albaran(Kg):</label>
-              <span class="input-group-text" id="basic-addon3">{{form.total_weight}}</span>
-            <div class="invalid-feedback">Peso Total es requerido</div>
+            <label for="inkjet_weight" class="form-label">Peso Inkject(Kg) seleccionado en albaran:</label>
+            <span class="input-group-text" id="basic-addon3">{{form.inkjet_weight}}</span>
           </div>
         </div>
       </div>
@@ -393,7 +423,6 @@ export default {
       selected_cartridge: {
         perPage: 10,
         currentPage: 1,
-        // 'fields': ['modelo', 'peso', 'marca', 'cantidad', 'peso_total', 'borrar', 'familia'],
         'fields': ['modelo', 'peso', 'marca', 'familia', 'cantidad', 'peso_total', 'borrar'],
         'items': [],
         'weitgh_editable': false,
@@ -452,6 +481,10 @@ export default {
         contact: '',
         rate: '',
         country: '',
+        assignedRate: '',
+        province: '',
+        geoZone: '',
+        community: '',
 
         // DESCARTABLES
         salesman: '',
@@ -503,8 +536,12 @@ export default {
               form.email = json.email.toUpperCase(),
               form.contact = json.persona_contacto.toUpperCase(),
               form.rate = json.clasificacion.toUpperCase(),
-              form.number = json.id.toUpperCase(),
-              form.country = json.pais.toUpperCase())
+              form.number = json.id,
+              form.country = json.pais.toUpperCase(),
+              form.assignedRate = json.tarifa_asignada.toUpperCase(),
+              form.province = json.provincia.toUpperCase(),
+              form.geoZone = json.zona_geografica.toUpperCase(),
+              form.community = json.poblacion.toUpperCase())
             )
           })
           .catch(function (error) {
@@ -611,7 +648,9 @@ export default {
           for (let items in this.form){
             if(['client_id', 'cifrc', 'name',
                 'number', 'address', 'telephone',
-                'email', 'contact', 'rate', 'country'].includes(items)){
+                'email', 'contact', 'rate', 'country',
+                'assignedRate', 'province', 'geoZone',
+                'community'].includes(items)){
               this.form[items] = ''
             }
           }
