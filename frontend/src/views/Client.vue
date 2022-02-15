@@ -379,7 +379,7 @@
   </div>
 
     <div style="float:right; margin-top: 15px" class="">
-     <b-button type="submit" block variant="primary">Guardar Albaran</b-button>
+     <b-button @click="handleSubmitClick" :pressed="false"  variant="primary">Guardar Albaran</b-button>
     </div>
 
     </b-overlay>
@@ -429,6 +429,10 @@ export default {
     return {
       endpoint: process.env.VUE_APP_BASE_URL,
       options: [],
+
+      buttonSubmit: {
+        state: false
+      },
 
       show_overlay: false,
       selectMode: 'multi',
@@ -906,8 +910,8 @@ export default {
         this.calculateWeightTotals()
     },
 
-    onSubmit(event) {
-      event.preventDefault()
+    onSubmit() {
+      // event.preventDefault()
 
       let send_request = this.validate()
 
@@ -976,6 +980,12 @@ export default {
     onHidden() {
         // Focus the show button when the overlay is removed
       this.$refs.show.focus()
+    },
+
+    handleSubmitClick(event) {
+      if(event.detail == 1){  // it seems to be cllick with mouse
+        this.onSubmit()
+      }
     }
 
   },
