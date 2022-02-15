@@ -195,23 +195,23 @@
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="laserWeightResidual" class="form-label">Peso Laser(Kg) Sobrante:</label>
+            <label for="laserWeightResidual" class="form-label">Peso Laser Sobrante(Kg):</label>
               <span class="input-group-text" id="basic-addon3">{{form.laserWeightResidual}}</span>
             <div class="invalid-feedback">Peso Laser es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="inkjetWeightResidual" class="form-label">Peso Inkject(Kg) Sobrante:</label>
+            <label for="inkjetWeightResidual" class="form-label">Peso Inkject Sobrante(Kg):</label>
             <span class="input-group-text" id="basic-addon3">{{form.inkjetWeightResidual}}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md col-sm form-group">
-            <label for="laserWeightResidual" class="form-label">Peso Laser(Kg) seleccionado en albaran:</label>
+            <label for="laserWeightResidual" class="form-label">Peso Laser seleccionado en albaran(Kg):</label>
               <span class="input-group-text" id="basic-addon3">{{form.laserWeighted}}</span>
             <div class="invalid-feedback">Peso Laser es requerido</div>
           </div>
           <div class="col-md col-sm form-group">
-            <label for="inkjetWeightResidual" class="form-label">Peso Inkject(Kg) seleccionado en albaran:</label>
+            <label for="inkjetWeightResidual" class="form-label">Peso Inkject seleccionado en albaran(Kg):</label>
             <span class="input-group-text" id="basic-addon3">{{form.inkjetWeighted}}</span>
           </div>
         </div>
@@ -387,6 +387,19 @@
     <div>
       <b-modal id="modal-error" title="ERROR" ok-only>
         <p class="my-4">algún error ha ocurrido. intente de nuevo.</p>
+      </b-modal>
+    </div>
+
+    <div>
+      <b-modal id="modal-error-weight" title="ERROR" ok-only>
+        <p class="my-4">Las Pesos no coinciden.</p>
+        <p class="my-4"><b>Peso Caja</b> tiene que ser igual a <b>Peso Total Albaran + Pesos Residuales</b></p>
+      </b-modal>
+    </div>
+
+    <div>
+      <b-modal id="modal-error-weight-selected-cartridge" title="ERROR" ok-only>
+        <p class="my-4">Hay cartucho(s) seleccionado(s) con un peso igual a  <b>CERO</b>.</p>
       </b-modal>
     </div>
 
@@ -660,15 +673,37 @@ export default {
     },
 
     validate: function(){
-      this.form.fieldsBlured = true;
+      let weighted = 0
+      let weightZero = false
+      this.form.fieldsBlured = true
       let _return = false
+      weighted = (this.form.totalWeight + 
+                  this.form.laserWeightResidual + 
+                  this.form.inkjetWeightResidual)
+
+      this.selected_cartridge.items.forEach(item =>{
+        if(item.peso == 0){
+          weightZero = true
+        }
+      })
+
       if (
-          this.validInputTexts(this.form.cifrc) &&
-          this.validInputTexts(this.form.name) &&
-          this.validateLenghtArray(this.selected_cartridge.items) &&
-          !this.show_overlay){
+            this.validInputTexts(this.form.cifrc) &&
+            this.validInputTexts(this.form.name) &&
+            this.validateLenghtArray(this.selected_cartridge.items) &&
+            !this.show_overlay &&
+            this.form.weight == weighted &&
+            !weightZero
+          ){
             _return = true
-      }
+          }
+
+        if(this.form.weight != weighted){
+          this.$bvModal.show('modal-error-weight')
+        } else if (weightZero){
+          this.$bvModal.show('modal-error-weight-selected-cartridge')
+        }
+
       return _return
     },
 
