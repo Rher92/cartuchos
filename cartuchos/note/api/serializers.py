@@ -60,6 +60,11 @@ class CreateNoteModelSerializer(serializers.ModelSerializer):
                     weight=item['weight']
                 )
                 cartridge_list.append(selected)
+
+                if cartridge.weitgh == 0:
+                    cartridge.weitgh = item['weight']
+                    cartridge.save()
+
             except User.DoesNotExist:
                 raise serializers.ValidationError(f'A Cartridge with pk: {item["id"]} does not exists.')
         return cartridge_list
