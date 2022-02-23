@@ -21,9 +21,6 @@
           </ul>
           <ul v-else class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <router-link class="nav-link" to="/">Pagina Principal</router-link>
-            </li>
-            <li class="nav-item">
               <router-link class="nav-link" to="/login">Iniciar sesión</router-link>
             </li>
           </ul>
