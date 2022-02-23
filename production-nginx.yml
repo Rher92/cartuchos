@@ -1,0 +1,45 @@
+version: '3'
+
+volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: cartuchos_local_django
+    container_name: cartuchos_local_django
+    depends_on:
+      - postgres
+    env_file:
+      - ./.envs/.production-nginx/.django
+      - ./.envs/.production-nginx/.postgres
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: cartuchos_production_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data:Z
+      - production_postgres_data_backups:/backups:z
+    env_file:
+      - ./.envs/.production-nginx/.postgres
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    image: nginx_privated_file
+    restart: on-failure:10
+    depends_on:
+      - django
+    volumes:
+      - ./staticfiles:/app/staticfiles
+      - ./mediafiles:/app/mediafiles
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
