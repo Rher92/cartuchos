@@ -1,12 +1,30 @@
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
+from pathlib import Path
 
+PATH_DIR = Path(__file__).resolve(strict=True).parent
 
 class Mailing:
     def test_mail(self):
         send_mail(
             subject = "Test Email",
             message = "This is a test email",
-            from_email = None,   # This will have no effect is you have set DEFAULT_FROM_EMAIL in settings.py
-            recipient_list = ['<your_recipient_email>'],    # This is a list
-            fail_silently = False     # Set this to False so that you will be noticed in any exception raised
+            from_email = None,
+            recipient_list = ['<your_recipient_email>'],
+            fail_silently = False
         )
+        
+    def test_email_pdf_attached(self):
+        pdf = str(PATH_DIR / 'test.pdf')
+        
+        email = EmailMessage(
+            'Hello',
+            'Body goes here',
+            'from@example.com',
+            ['to1@example.com', 'to2@example.com'],
+            ['bcc@example.com'],
+            reply_to=['another@example.com'],
+            headers={'Message-ID': 'foo'},
+        )
+
+        email.attach_file(pdf)
+        email.send()
