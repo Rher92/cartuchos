@@ -27,7 +27,7 @@ CACHES = {
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
-    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
+    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
 )
 
 # django-debug-toolbar
@@ -81,3 +81,6 @@ CORS_ALLOWED_ORIGINS = [
 # CORS_ORIGIN_WHITELIST = (
 #     '*'
 # )
+
+EMAIL_HOST = 'smtp-server'  # Your Mailhog Host
+EMAIL_PORT = '1025'
