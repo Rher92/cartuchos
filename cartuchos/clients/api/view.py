@@ -9,7 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 
 
-from clients.models import Cliente
+from cartuchos.clients.models import Cliente
 from .serializers.serializers import ClientAllSerializer, ClientShortSerializer, ClientLargeSerializer
 
 User = get_user_model()

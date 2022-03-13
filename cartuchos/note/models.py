@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
-from utils.models import BaseCreatedUpdatedModel
+from cartuchos.utils.models import BaseCreatedUpdatedModel
 
 
 User = get_user_model()

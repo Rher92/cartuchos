@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render
 # Register your models here.
 
 from .models import Fees
-from cartridge.models import Family, SubFamilyIntern
+from cartuchos.cartridge.models import Family, SubFamilyIntern
 
 
 class CsvImportForm(forms.Form):

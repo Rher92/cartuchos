@@ -8,7 +8,7 @@ from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 
 from .paginations.paginations import ShortCartridgeResultsPagination
-from cartridge.models import Cartridges, SubFamily, Family
+from cartuchos.cartridge.models import Cartridges, SubFamily, Family
 from .serializers.cartridge import CartridgesSerializer, SubFamilySerializer
 
 User = get_user_model()

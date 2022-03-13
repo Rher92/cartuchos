@@ -1,11 +1,11 @@
 from django.db import models
 
-from utils.models import BaseCreatedUpdatedModel
+from cartuchos.utils.models import BaseCreatedUpdatedModel
 
 
 # Create your models here.
 
-from cartridge.models import SubFamilyIntern, Family
+from cartuchos.cartridge.models import SubFamilyIntern, Family
 
 
 class Fees(BaseCreatedUpdatedModel):

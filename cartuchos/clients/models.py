@@ -1,6 +1,6 @@
 from django.db import models
 
-from utils.models import BaseCreatedUpdatedModel
+from cartuchos.utils.models import BaseCreatedUpdatedModel
 
 # Create your models here.
 

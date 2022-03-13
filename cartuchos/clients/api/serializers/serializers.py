@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from clients.models import PrincipalCIF, NombreRazonSocial, TarifaAsignada, Tipo, \
+from cartuchos.clients.models import PrincipalCIF, NombreRazonSocial, TarifaAsignada, Tipo, \
     Perfil, CpZip, Poblacion, ZonaGeografica, Provincia, \
     Pais, Clasificacion, Campaña, Frecuencia, Nima, \
     ContratoFirmado, Cliente

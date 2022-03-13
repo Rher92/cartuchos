@@ -2,7 +2,7 @@ from rest_framework import mixins, viewsets, status
 from rest_framework.response import Response
 
 from .serializers import CreateNoteModelSerializer
-from note.models import Notes
+from cartuchos.note.models import Notes
 
 
 class NoteViewSet(mixins.CreateModelMixin,

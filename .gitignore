@@ -276,3 +276,6 @@ cartuchos/media/
 .env
 .envs/*
 !.envs/.local/
+
+
+celerybeat-schedule

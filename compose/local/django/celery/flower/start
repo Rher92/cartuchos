@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+
+worker_ready() {
+    celery -A config inspect ping
+}
+
+until worker_ready; do
+  >&2 echo 'Celery workers not available'
+  sleep 60
+done
+>&2 echo 'Celery workers is available'
+echo "${CELERY_BROKER_URL}"
+echo "${CELERY_FLOWER_USER}:${CELERY_FLOWER_PASSWORD}"
+
+celery flower --app=config --broker="${CELERY_BROKER_URL}" --basic_auth="${CELERY_FLOWER_USER}:${CELERY_FLOWER_PASSWORD}"

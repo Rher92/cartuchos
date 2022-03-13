@@ -1,5 +1,5 @@
 from django.db import models
-from utils.models import BaseCreatedUpdatedModel
+from cartuchos.utils.models import BaseCreatedUpdatedModel
 
 
 # store report requests for testing, used by ReportBro Designer

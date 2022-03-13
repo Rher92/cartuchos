@@ -2,9 +2,9 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
 
-from clients.models import Cliente
-from note.models import Notes, SelectedCartridges
-from cartridge.models import Cartridges
+from cartuchos.clients.models import Cliente
+from cartuchos.note.models import Notes, SelectedCartridges
+from cartuchos.cartridge.models import Cartridges
 
 User = get_user_model()
 

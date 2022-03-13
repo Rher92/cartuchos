@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from cartridge.models import Cartridges, SubFamily
+from cartuchos.cartridge.models import Cartridges, SubFamily
 
 
 class SubFamilySerializer(serializers.ModelSerializer):
