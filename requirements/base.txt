@@ -21,8 +21,9 @@ django-cors-headers==3.11.0 # https://github.com/adamchainz/django-cors-headers
 django-filter
 reportbro-lib
 
-django-celery-beat==2.0.0
-django-celery-email==3.0.0
-celery==4.4.0
+django-celery-beat
+django-celery-email
+celery
 flower
 redis
+boto3
