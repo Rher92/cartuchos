@@ -1,16 +1,16 @@
 version: '3'
 
 volumes:
-  cartuchos_local_postgres_data: {}
-  cartuchos_local_postgres_data_backups: {}
+  backend_local_postgres_data: {}
+  backend_local_postgres_data_backups: {}
 
 services:
   django:
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: cartuchos_local_django
-    container_name: cartuchos_local_django
+    image: backend_local_django
+    container_name: backend_local_django
     depends_on:
       - postgres
     volumes:
@@ -26,17 +26,17 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: cartuchos_production_postgres
-    container_name: cartuchos_local_postgres
+    image: backend_production_postgres
+    container_name: backend_local_postgres
     volumes:
-      - cartuchos_local_postgres_data:/var/lib/postgresql/data:Z
-      - cartuchos_local_postgres_data_backups:/backups:z
+      - backend_local_postgres_data:/var/lib/postgresql/data:Z
+      - backend_local_postgres_data_backups:/backups:z
     env_file:
       - ./.envs/.local/.postgres
 
   docs:
-    image: cartuchos_local_docs
-    container_name: cartuchos_local_docs
+    image: backend_local_docs
+    container_name: backend_local_docs
     build:
       context: .
       dockerfile: ./compose/local/docs/Dockerfile
@@ -45,7 +45,7 @@ services:
     volumes:
       - ./docs:/docs:z
       - ./config:/app/config:z
-      - ./cartuchos:/app/cartuchos:z
+      - ./backend:/app/backend:z
     ports:
       - "7000:7000"
     command: /start-docs

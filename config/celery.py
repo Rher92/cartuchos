@@ -17,7 +17,7 @@ from django.conf import settings
 # this code copied from manage.py
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.local')
 
-tasks = settings.INSTALLED_APPS.append('cartuchos.utils.tasks')
+tasks = settings.INSTALLED_APPS.append('backend.utils.tasks')
 
 app = Celery("celery")
 app.config_from_object('django.conf:settings', namespace='CELERY')

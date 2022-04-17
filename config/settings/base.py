@@ -6,8 +6,8 @@ from pathlib import Path
 import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# cartuchos/
-APPS_DIR = ROOT_DIR / "cartuchos"
+# backend/
+APPS_DIR = ROOT_DIR / "backend"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -78,12 +78,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "cartuchos.users",
-    "cartuchos.cartridge",
-    "cartuchos.clients",
-    "cartuchos.fees",
-    "cartuchos.note",
-    "cartuchos.report",
+    "backend.users",
+    "backend.report",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -92,7 +88,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "cartuchos.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "backend.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -187,7 +183,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "cartuchos.users.context_processors.allauth_settings",
+                "backend.users.context_processors.allauth_settings",
             ],
         },
     }
@@ -270,13 +266,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "cartuchos.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "backend.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-ACCOUNT_FORMS = {"signup": "cartuchos.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "backend.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "cartuchos.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "backend.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "cartuchos.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {"signup": "backend.users.forms.UserSocialSignupForm"}
 
 # django-rest-framework
 # -------------------------------------------------------------------------------

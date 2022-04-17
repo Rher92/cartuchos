@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: cartuchos_production_django
+    image: backend_production_django
     depends_on:
       - postgres
       - redis
@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: cartuchos_production_postgres
+    image: backend_production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data:Z
       - production_postgres_data_backups:/backups:z
@@ -34,7 +34,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/traefik/Dockerfile
-    image: cartuchos_production_traefik
+    image: backend_production_traefik
     depends_on:
       - django
     volumes:

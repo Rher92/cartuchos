@@ -24,8 +24,8 @@ if __name__ == "__main__":
         raise
 
     # This allows easy placement of apps within the interior
-    # cartuchos directory.
+    # backend directory.
     current_path = Path(__file__).parent.resolve()
-    sys.path.append(str(current_path / "cartuchos"))
+    sys.path.append(str(current_path / "backend"))
 
     execute_from_command_line(sys.argv)

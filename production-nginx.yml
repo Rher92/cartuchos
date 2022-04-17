@@ -9,8 +9,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: cartuchos_local_django
-    container_name: cartuchos_local_django
+    image: backend_local_django
+    container_name: backend_local_django
     depends_on:
       - postgres
     env_file:
@@ -22,7 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: cartuchos_production_postgres
+    image: backend_production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data:Z
       - production_postgres_data_backups:/backups:z

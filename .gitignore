@@ -269,7 +269,7 @@ Session.vim
 tags
 
 ### Project template
-cartuchos/media/
+backend/media/
 
 .pytest_cache/
 .ipython/

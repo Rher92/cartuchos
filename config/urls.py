@@ -15,10 +15,10 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    path("users/", include("cartuchos.users.urls", namespace="users")),
+    path("users/", include("backend.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("reports/", include("cartuchos.report.urls")),
+    path("reports/", include("backend.report.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
@@ -56,6 +56,6 @@ if settings.DEBUG:
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
 
 
-admin.site.site_header = "Retornos Consumibles"
-admin.site.site_title = "Retornos Consumibles"
-admin.site.index_title = "Portal de Administracion"
+admin.site.site_header = "admin"
+admin.site.site_title = "admin"
+admin.site.index_title = "admin"
